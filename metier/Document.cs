@@ -12,8 +12,6 @@ namespace Mediateq_AP_SIO2.metier
         private string titre;
         private string image;
         private Categorie laCategorie;
-        private List<Descripteur> lesDescripteurs;
-
         public Document(string unId, string unTitre, string uneImage, Categorie uneCategorie)
         {
             idDoc = unId;
@@ -21,14 +19,10 @@ namespace Mediateq_AP_SIO2.metier
             image = uneImage;
             laCategorie = uneCategorie;
         }
-
-
         public string IdDoc { get => idDoc; set => idDoc = value; }
         public string Titre { get => titre; set => titre = value; }
         public string Image { get => image; set => image = value; }
         internal Categorie LaCategorie { get => laCategorie; set => laCategorie = value; }
-        internal List<Descripteur> LesDescripteurs { get => lesDescripteurs; set => lesDescripteurs = value; }
     }
-
-
 }
+
