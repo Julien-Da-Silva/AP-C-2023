@@ -23,6 +23,7 @@ namespace Mediateq_AP_SIO2
         static List<Abonne> lesAbonnes;
         static List<Document> lesDocuments;
         static List<Rayon> lesRayons;
+        static List<DVD> lesDVD;
 
         //static List<DVD> lesDVD;
 
@@ -48,7 +49,7 @@ namespace Mediateq_AP_SIO2
             lesDocuments = DAODocuments.getAllDocuments();
             lesRayons = DAODocuments.getAllRayons();
             lesCategories = DAODocuments.getAllCategories();
-            //    lesDVD = DAODocuments.getAllDVD();
+            lesDVD = DAODocuments.getAllDVD();
 
         }
 
@@ -313,7 +314,7 @@ namespace Mediateq_AP_SIO2
             string uneCollection = txtLivre_collection.Text;
             Categorie uneCategorie = (Categorie)cbx_livre.SelectedItem;
 
-            Livre livre1 = new Livre(IDLivre, ISBNLivre, AuteurLivre, TitreLivre, ImageLivre, uneCollection, uneCategorie);
+            Livre livre1 = new Livre(IDLivre, TitreLivre, ISBNLivre, AuteurLivre, uneCollection, ImageLivre, uneCategorie);
             DAODocuments.ajoutLivre(livre1);
             MessageBox.Show("livre ajouté");
         }
@@ -327,6 +328,15 @@ namespace Mediateq_AP_SIO2
             cbxModifCateg.DisplayMember = "libelle";
             cbModifLivre.DataSource = lesLivres;
             cbModifLivre.DisplayMember = "auteur";
+
+            lesLivres = DAODocuments.getAllLivres();
+
+            //Affichage des nouvelles données dans le DataGrid
+
+            foreach (Livre livreModifcation in lesLivres)
+            {
+                dgvLivre.Rows.Add(livreModifcation.IdDoc, livreModifcation.ISBN1, livreModifcation.Auteur, livreModifcation.Titre, livreModifcation.Image, livreModifcation.LaCollection, livreModifcation.LaCategorie.Libelle);
+            }
 
         }
 
@@ -366,6 +376,122 @@ namespace Mediateq_AP_SIO2
             DAODocuments.suppLivre(livre);
             MessageBox.Show("livre supprimé");
         }
+
+        private void btnModifLivre_Enter(object sender, EventArgs e)
+        {
+            string idLivreModif = txtBoxModifLivreId.Text;
+            string ISBNLivreModif = txtBoxModifLivreISBN.Text;
+            string auteurLivreModif = txtBoxModifLivreAuteur.Text;
+            string titreLivreModif = txtBoxModifLivreTitre.Text;
+            string imageLivreModif = txtBoxModifLivreImage.Text;
+            string collectionLivreModif = txtBoxModifLivreCollection.Text;
+            Categorie categorieModifLivre = (Categorie)cbxModifCateg.SelectedItem;
+
+            Livre livre = new Livre(idLivreModif, ISBNLivreModif, auteurLivreModif, titreLivreModif, imageLivreModif, collectionLivreModif, categorieModifLivre);
+
+            DAODocuments.modifLivre(livre);
+
+            lesLivres = DAODocuments.getAllLivres();
+
+            dgvLivre.Rows.Clear();
+
+            //Affichage des nouvelles données dans le DataGrid
+
+            foreach (Livre livreModifcation in lesLivres)
+            {
+                dgvLivre.Rows.Add(livreModifcation.IdDoc, livreModifcation.ISBN1, livreModifcation.Auteur, livreModifcation.Titre, livreModifcation.Image, livreModifcation.LaCollection, livreModifcation.LaCategorie.Libelle);
+            }
+        }
+
+        private void CRUD_DVD_Enter(object sender, EventArgs e)
+        {
+            lesDVD = DAODocuments.getAllDVD();
+            cbx_categDVD.DataSource = lesCategories;
+            cbx_categDVD.DisplayMember = "libelle";
+            cbx_ModifDvd.DataSource = lesDVD;
+            cbx_ModifDvd.DisplayMember = "titre";
+            cbx_ModifCategDvd.DataSource= lesCategories;
+            cbx_ModifCategDvd.DisplayMember = "libelle";
+        }
+
+        private void btnAjout_DVD_Enter(object sender, EventArgs e)
+        {
+            lesDVD = DAODocuments.getAllDVD();
+            string IDDVD = txtDvd_id.Text;
+            string TitreDVD = txtDvd_Titre.Text;
+            string ImageDVD = txtDvd_Image.Text;
+            string SynopsisDVD = txtDvd_Synopsis.Text;
+            string RealisateurDVD = txtDvd_Realisateur.Text;
+            int DureeDVD = Int32.Parse(txtDvd_Duree.Text);
+            Categorie uneCategorie = (Categorie)cbx_categDVD.SelectedItem;
+
+            DVD dvd1 = new DVD(IDDVD, TitreDVD, SynopsisDVD , RealisateurDVD, DureeDVD, ImageDVD , uneCategorie);
+            DAODocuments.ajoutDVD(dvd1);
+            MessageBox.Show("dvd ajouté");
+        }
+
+        private void cbx_ModifDvd_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbx_ModifCategDvd.DataSource = lesCategories;
+            cbx_ModifCategDvd.DisplayMember = "libelle";
+
+            DVD DvdSelec = (DVD)cbx_ModifDvd.SelectedItem;
+
+            foreach (DVD unDVD in lesDVD)
+            {
+                if (unDVD.IdDoc == DvdSelec.IdDoc)
+                {
+                    txtBoxModifDvdId.Text = DvdSelec.IdDoc;
+                    txtBoxModifDvdTitre.Text = DvdSelec.Titre;
+                    txtBoxModifDvdImage.Text = DvdSelec.Image;
+                    txtBoxModifDvdSynopsis.Text = DvdSelec.Synopsis;
+                    txtBoxModifDvdRealisateur.Text = DvdSelec.Realisateur;
+                    txtBoxModifDvdDuree.Text = DvdSelec.Duree.ToString();
+                    cbx_ModifCategDvd.Text = DvdSelec.LaCategorie.Libelle;
+                }
+            }
+        }
+
+        private void btnModifDvd_Enter(object sender, EventArgs e)
+        {
+            string idDvdModif = txtBoxModifDvdId.Text;
+            string TitreDvdModif = txtBoxModifDvdTitre.Text;
+            string ImageDvdeModif = txtBoxModifDvdImage.Text;
+            string SynopsisDvdModif = txtBoxModifDvdSynopsis.Text;
+            string RealisateurDvdModif = txtBoxModifDvdRealisateur.Text;
+            int DureeDvdModif = Int32.Parse(txtBoxModifDvdDuree.Text);
+            Categorie CategorieModifDvd = (Categorie)cbx_ModifCategDvd.SelectedItem;
+
+            DVD dvd = new DVD(idDvdModif, TitreDvdModif, ImageDvdeModif, SynopsisDvdModif, DureeDvdModif, RealisateurDvdModif, CategorieModifDvd);
+
+            DAODocuments.modifDVD(dvd);
+        }
+
+        private void btnSuppDvd_Enter(object sender, EventArgs e)
+        {
+            string idDvdModif = txtBoxModifDvdId.Text;
+            string TitreDvdModif = txtBoxModifDvdTitre.Text;
+            string ImageDvdeModif = txtBoxModifDvdImage.Text;
+            string SynopsisDvdModif = txtBoxModifDvdSynopsis.Text;
+            string RealisateurDvdModif = txtBoxModifDvdRealisateur.Text;
+            int DureeDvdModif = Int32.Parse(txtBoxModifDvdDuree.Text);
+            Categorie CategorieModifDvd = (Categorie)cbx_ModifCategDvd.SelectedItem;
+
+            DVD dvd = new DVD(idDvdModif, TitreDvdModif, ImageDvdeModif, SynopsisDvdModif, DureeDvdModif, RealisateurDvdModif, CategorieModifDvd);
+
+            DAODocuments.suppDVD(dvd);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string user = txtuser.Text;
+            string password = txtmodepasse.Text;
+
+            Login login = new Login(user, password);
+
+            DAODocuments.connexion(login);
+        }
+
 
         //private void cbModifLivre_Enter(object sender, EventArgs e)
         // {
