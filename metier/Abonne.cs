@@ -14,11 +14,11 @@ namespace Mediateq_AP_SIO2.metier
         private string adresse;
         private int tel;
         private string adresse_mail;
-        private string date_naissance;
-        private string date_premier_abonnement;
-        private string date_fin_abo;
+        private DateTime date_naissance;
+        private DateTime date_premier_abonnement;
+        private DateTime date_fin_abo;
 
-        public Abonne(int id, string nom, string prenom, string adresse, int tel, string adresse_mail, string date_naissance, string date_premier_abonnement, string date_fin_abo)
+        public Abonne(int id, string nom, string prenom, string adresse, int tel, string adresse_mail, DateTime date_naissance, DateTime date_premier_abonnement, DateTime date_fin_abo)
         {
             this.id = id;
             this.nom = nom;
@@ -42,10 +42,10 @@ namespace Mediateq_AP_SIO2.metier
 
         public string Adresse_mail { get => adresse_mail; set => adresse_mail = value; }
 
-        public string Date_naiss { get => date_naissance; set => date_naissance = value; }
+        public DateTime Date_naiss { get => date_naissance; set => date_naissance = value; }
 
-        public string Date_premier_abo { get => date_premier_abonnement; set => date_premier_abonnement = value; }
+        public DateTime Date_premier_abo { get => date_premier_abonnement; set => date_premier_abonnement = value; }
 
-        public string Date_fin_abo { get => date_fin_abo; set => date_fin_abo = value; }
+        public DateTime Date_fin_abo { get => date_fin_abo; set => date_fin_abo = value; }
     }
 }

@@ -91,9 +91,21 @@
   <ItemGroup>
     <Compile Include="bdd\DAOFactory.cs" />
     <Compile Include="divers\ExceptionSio.cs" />
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="login and register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="login and register.Designer.cs">
+      <DependentUpon>login and register.cs</DependentUpon>
+    </Compile>
     <Compile Include="metier\Categorie.cs" />
     <Compile Include="metier\Abonne.cs" />
-    <Compile Include="metier\Login.cs" />
+    <Compile Include="metier\Users.cs" />
     <Compile Include="metier\Exemplaire.cs" />
     <Compile Include="metier\Rayon.cs" />
     <Compile Include="metier\DVD.cs" />
@@ -112,6 +124,12 @@
     <Compile Include="FrmMediateq.designer.cs">
       <DependentUpon>FrmMediateq.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="login and register.resx">
+      <DependentUpon>login and register.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -141,6 +159,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logo c#.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

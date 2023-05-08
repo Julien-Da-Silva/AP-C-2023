@@ -29,7 +29,7 @@ namespace Mediateq_AP_SIO2
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabOngletsApplication = new System.Windows.Forms.TabControl();
+            this.Connexion = new System.Windows.Forms.TabControl();
             this.tabParutions = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvParutions = new System.Windows.Forms.DataGridView();
@@ -82,6 +82,8 @@ namespace Mediateq_AP_SIO2
             this.Realisateur = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Duree = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CRUD_abo = new System.Windows.Forms.TabPage();
+            this.dtp_premier_abo = new System.Windows.Forms.DateTimePicker();
+            this.dtp_annee = new System.Windows.Forms.DateTimePicker();
             this.Refresh = new System.Windows.Forms.Button();
             this.dataGridAbo = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,13 +96,13 @@ namespace Mediateq_AP_SIO2
             this.datePremierAbo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateFinAbo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dtp_modif_date_premier_abo = new System.Windows.Forms.DateTimePicker();
+            this.dtp_modif_annee = new System.Windows.Forms.DateTimePicker();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label33 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.modif_fin_abo = new System.Windows.Forms.TextBox();
-            this.modif_date_premier_abonnement = new System.Windows.Forms.TextBox();
             this.label31 = new System.Windows.Forms.Label();
-            this.modif_date_naissance = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.modif_adresse_mail = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
@@ -118,7 +120,6 @@ namespace Mediateq_AP_SIO2
             this.Modifier = new System.Windows.Forms.Button();
             this.supprimer = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
@@ -129,11 +130,8 @@ namespace Mediateq_AP_SIO2
             this.label14 = new System.Windows.Forms.Label();
             this.Aj_id = new System.Windows.Forms.TextBox();
             this.Ajouter = new System.Windows.Forms.Button();
-            this.Aj_date_fin_abo = new System.Windows.Forms.TextBox();
-            this.Aj_date_premier_abo = new System.Windows.Forms.TextBox();
             this.Aj_adresse_mail = new System.Windows.Forms.TextBox();
             this.Aj_adresse = new System.Windows.Forms.TextBox();
-            this.Aj_date_naiss = new System.Windows.Forms.TextBox();
             this.Aj_tel = new System.Windows.Forms.TextBox();
             this.Aj_prenom = new System.Windows.Forms.TextBox();
             this.Aj_nom = new System.Windows.Forms.TextBox();
@@ -241,15 +239,8 @@ namespace Mediateq_AP_SIO2
             this.txtDvd_id = new System.Windows.Forms.TextBox();
             this.cbx_categDVD = new System.Windows.Forms.ComboBox();
             this.customInstaller1 = new MySql.Data.MySqlClient.CustomInstaller();
-            this.Connexion = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label69 = new System.Windows.Forms.Label();
-            this.label70 = new System.Windows.Forms.Label();
-            this.txtuser = new System.Windows.Forms.TextBox();
-            this.txtmodepasse = new System.Windows.Forms.TextBox();
-            this.label71 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.tabOngletsApplication.SuspendLayout();
+            this.dtp_date_fin_abo = new System.Windows.Forms.DateTimePicker();
+            this.Connexion.SuspendLayout();
             this.tabParutions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParutions)).BeginInit();
             this.tabTitres.SuspendLayout();
@@ -275,29 +266,26 @@ namespace Mediateq_AP_SIO2
             this.CRUD_DVD.SuspendLayout();
             this.gpxCRUD_DVD2.SuspendLayout();
             this.gpxCRUD_DVD.SuspendLayout();
-            this.Connexion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabOngletsApplication
+            // Connexion
             // 
-            this.tabOngletsApplication.Controls.Add(this.Connexion);
-            this.tabOngletsApplication.Controls.Add(this.tabParutions);
-            this.tabOngletsApplication.Controls.Add(this.tabTitres);
-            this.tabOngletsApplication.Controls.Add(this.tabLivres);
-            this.tabOngletsApplication.Controls.Add(this.tabDVD);
-            this.tabOngletsApplication.Controls.Add(this.CRUD_abo);
-            this.tabOngletsApplication.Controls.Add(this.tabPage1);
-            this.tabOngletsApplication.Controls.Add(this.exemplaire);
-            this.tabOngletsApplication.Controls.Add(this.CRUDLivreDvd);
-            this.tabOngletsApplication.Controls.Add(this.CRUD_DVD);
-            this.tabOngletsApplication.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabOngletsApplication.Location = new System.Drawing.Point(0, 0);
-            this.tabOngletsApplication.Name = "tabOngletsApplication";
-            this.tabOngletsApplication.SelectedIndex = 0;
-            this.tabOngletsApplication.Size = new System.Drawing.Size(1370, 749);
-            this.tabOngletsApplication.TabIndex = 0;
-            this.tabOngletsApplication.Enter += new System.EventHandler(this.tabOngletsApplication_Enter);
+            this.Connexion.Controls.Add(this.tabParutions);
+            this.Connexion.Controls.Add(this.tabTitres);
+            this.Connexion.Controls.Add(this.tabLivres);
+            this.Connexion.Controls.Add(this.tabDVD);
+            this.Connexion.Controls.Add(this.CRUD_abo);
+            this.Connexion.Controls.Add(this.tabPage1);
+            this.Connexion.Controls.Add(this.exemplaire);
+            this.Connexion.Controls.Add(this.CRUDLivreDvd);
+            this.Connexion.Controls.Add(this.CRUD_DVD);
+            this.Connexion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Connexion.Location = new System.Drawing.Point(0, 0);
+            this.Connexion.Name = "Connexion";
+            this.Connexion.SelectedIndex = 0;
+            this.Connexion.Size = new System.Drawing.Size(1370, 749);
+            this.Connexion.TabIndex = 0;
+            this.Connexion.Enter += new System.EventHandler(this.tabOngletsApplication_Enter);
             // 
             // tabParutions
             // 
@@ -771,14 +759,16 @@ namespace Mediateq_AP_SIO2
             // 
             // CRUD_abo
             // 
+            this.CRUD_abo.Controls.Add(this.dtp_premier_abo);
+            this.CRUD_abo.Controls.Add(this.dtp_annee);
             this.CRUD_abo.Controls.Add(this.Refresh);
             this.CRUD_abo.Controls.Add(this.dataGridAbo);
+            this.CRUD_abo.Controls.Add(this.modif_fin_abo);
             this.CRUD_abo.Controls.Add(this.groupBox1);
             this.CRUD_abo.Controls.Add(this.cbSupp);
             this.CRUD_abo.Controls.Add(this.Modifier);
             this.CRUD_abo.Controls.Add(this.supprimer);
             this.CRUD_abo.Controls.Add(this.label23);
-            this.CRUD_abo.Controls.Add(this.label22);
             this.CRUD_abo.Controls.Add(this.label21);
             this.CRUD_abo.Controls.Add(this.label20);
             this.CRUD_abo.Controls.Add(this.label19);
@@ -789,11 +779,8 @@ namespace Mediateq_AP_SIO2
             this.CRUD_abo.Controls.Add(this.label14);
             this.CRUD_abo.Controls.Add(this.Aj_id);
             this.CRUD_abo.Controls.Add(this.Ajouter);
-            this.CRUD_abo.Controls.Add(this.Aj_date_fin_abo);
-            this.CRUD_abo.Controls.Add(this.Aj_date_premier_abo);
             this.CRUD_abo.Controls.Add(this.Aj_adresse_mail);
             this.CRUD_abo.Controls.Add(this.Aj_adresse);
-            this.CRUD_abo.Controls.Add(this.Aj_date_naiss);
             this.CRUD_abo.Controls.Add(this.Aj_tel);
             this.CRUD_abo.Controls.Add(this.Aj_prenom);
             this.CRUD_abo.Controls.Add(this.Aj_nom);
@@ -804,6 +791,24 @@ namespace Mediateq_AP_SIO2
             this.CRUD_abo.Text = "CRUD_abo";
             this.CRUD_abo.UseVisualStyleBackColor = true;
             this.CRUD_abo.Enter += new System.EventHandler(this.CRUD_abo_Enter);
+            // 
+            // dtp_premier_abo
+            // 
+            this.dtp_premier_abo.Enabled = false;
+            this.dtp_premier_abo.Location = new System.Drawing.Point(175, 267);
+            this.dtp_premier_abo.MaxDate = new System.DateTime(2024, 1, 1, 0, 0, 0, 0);
+            this.dtp_premier_abo.MinDate = new System.DateTime(2023, 5, 8, 0, 0, 0, 0);
+            this.dtp_premier_abo.Name = "dtp_premier_abo";
+            this.dtp_premier_abo.Size = new System.Drawing.Size(117, 20);
+            this.dtp_premier_abo.TabIndex = 46;
+            this.dtp_premier_abo.Value = new System.DateTime(2023, 5, 8, 0, 0, 0, 0);
+            // 
+            // dtp_annee
+            // 
+            this.dtp_annee.Location = new System.Drawing.Point(167, 233);
+            this.dtp_annee.Name = "dtp_annee";
+            this.dtp_annee.Size = new System.Drawing.Size(125, 20);
+            this.dtp_annee.TabIndex = 45;
             // 
             // Refresh
             // 
@@ -880,13 +885,13 @@ namespace Mediateq_AP_SIO2
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.dtp_date_fin_abo);
+            this.groupBox1.Controls.Add(this.dtp_modif_date_premier_abo);
+            this.groupBox1.Controls.Add(this.dtp_modif_annee);
             this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.label33);
             this.groupBox1.Controls.Add(this.label32);
-            this.groupBox1.Controls.Add(this.modif_fin_abo);
-            this.groupBox1.Controls.Add(this.modif_date_premier_abonnement);
             this.groupBox1.Controls.Add(this.label31);
-            this.groupBox1.Controls.Add(this.modif_date_naissance);
             this.groupBox1.Controls.Add(this.label30);
             this.groupBox1.Controls.Add(this.modif_adresse_mail);
             this.groupBox1.Controls.Add(this.label29);
@@ -906,6 +911,20 @@ namespace Mediateq_AP_SIO2
             this.groupBox1.TabIndex = 41;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            // 
+            // dtp_modif_date_premier_abo
+            // 
+            this.dtp_modif_date_premier_abo.Location = new System.Drawing.Point(188, 282);
+            this.dtp_modif_date_premier_abo.Name = "dtp_modif_date_premier_abo";
+            this.dtp_modif_date_premier_abo.Size = new System.Drawing.Size(121, 20);
+            this.dtp_modif_date_premier_abo.TabIndex = 52;
+            // 
+            // dtp_modif_annee
+            // 
+            this.dtp_modif_annee.Location = new System.Drawing.Point(189, 240);
+            this.dtp_modif_annee.Name = "dtp_modif_annee";
+            this.dtp_modif_annee.Size = new System.Drawing.Size(121, 20);
+            this.dtp_modif_annee.TabIndex = 46;
             // 
             // numericUpDown1
             // 
@@ -939,17 +958,10 @@ namespace Mediateq_AP_SIO2
             // 
             // modif_fin_abo
             // 
-            this.modif_fin_abo.Location = new System.Drawing.Point(189, 320);
+            this.modif_fin_abo.Location = new System.Drawing.Point(716, 289);
             this.modif_fin_abo.Name = "modif_fin_abo";
             this.modif_fin_abo.Size = new System.Drawing.Size(100, 20);
             this.modif_fin_abo.TabIndex = 49;
-            // 
-            // modif_date_premier_abonnement
-            // 
-            this.modif_date_premier_abonnement.Location = new System.Drawing.Point(189, 282);
-            this.modif_date_premier_abonnement.Name = "modif_date_premier_abonnement";
-            this.modif_date_premier_abonnement.Size = new System.Drawing.Size(100, 20);
-            this.modif_date_premier_abonnement.TabIndex = 48;
             // 
             // label31
             // 
@@ -959,13 +971,6 @@ namespace Mediateq_AP_SIO2
             this.label31.Size = new System.Drawing.Size(69, 13);
             this.label31.TabIndex = 38;
             this.label31.Text = "date_fin_abo";
-            // 
-            // modif_date_naissance
-            // 
-            this.modif_date_naissance.Location = new System.Drawing.Point(189, 237);
-            this.modif_date_naissance.Name = "modif_date_naissance";
-            this.modif_date_naissance.Size = new System.Drawing.Size(100, 20);
-            this.modif_date_naissance.TabIndex = 47;
             // 
             // label30
             // 
@@ -1112,23 +1117,14 @@ namespace Mediateq_AP_SIO2
             this.label23.TabIndex = 20;
             this.label23.Text = "nom Abonné";
             // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(66, 320);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(69, 13);
-            this.label22.TabIndex = 18;
-            this.label22.Text = "date_fin_abo";
-            // 
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(39, 273);
+            this.label21.Location = new System.Drawing.Point(24, 273);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(130, 13);
+            this.label21.Size = new System.Drawing.Size(133, 13);
             this.label21.TabIndex = 17;
-            this.label21.Text = "date-premier_abonnement";
+            this.label21.Text = "date_premier_abonnement";
             // 
             // label20
             // 
@@ -1202,27 +1198,13 @@ namespace Mediateq_AP_SIO2
             // 
             // Ajouter
             // 
-            this.Ajouter.Location = new System.Drawing.Point(186, 361);
+            this.Ajouter.Location = new System.Drawing.Point(186, 305);
             this.Ajouter.Name = "Ajouter";
             this.Ajouter.Size = new System.Drawing.Size(75, 23);
             this.Ajouter.TabIndex = 8;
             this.Ajouter.Text = "Ajouter";
             this.Ajouter.UseVisualStyleBackColor = true;
-            this.Ajouter.Click += new System.EventHandler(this.Ajouter_Click);
-            // 
-            // Aj_date_fin_abo
-            // 
-            this.Aj_date_fin_abo.Location = new System.Drawing.Point(175, 313);
-            this.Aj_date_fin_abo.Name = "Aj_date_fin_abo";
-            this.Aj_date_fin_abo.Size = new System.Drawing.Size(100, 20);
-            this.Aj_date_fin_abo.TabIndex = 7;
-            // 
-            // Aj_date_premier_abo
-            // 
-            this.Aj_date_premier_abo.Location = new System.Drawing.Point(175, 270);
-            this.Aj_date_premier_abo.Name = "Aj_date_premier_abo";
-            this.Aj_date_premier_abo.Size = new System.Drawing.Size(100, 20);
-            this.Aj_date_premier_abo.TabIndex = 6;
+            this.Ajouter.Click += new System.EventHandler(this.Ajouter_Click_1);
             // 
             // Aj_adresse_mail
             // 
@@ -1237,13 +1219,6 @@ namespace Mediateq_AP_SIO2
             this.Aj_adresse.Name = "Aj_adresse";
             this.Aj_adresse.Size = new System.Drawing.Size(100, 20);
             this.Aj_adresse.TabIndex = 4;
-            // 
-            // Aj_date_naiss
-            // 
-            this.Aj_date_naiss.Location = new System.Drawing.Point(175, 230);
-            this.Aj_date_naiss.Name = "Aj_date_naiss";
-            this.Aj_date_naiss.Size = new System.Drawing.Size(100, 20);
-            this.Aj_date_naiss.TabIndex = 3;
             // 
             // Aj_tel
             // 
@@ -2180,100 +2155,23 @@ namespace Mediateq_AP_SIO2
             this.cbx_categDVD.Size = new System.Drawing.Size(121, 21);
             this.cbx_categDVD.TabIndex = 1;
             // 
-            // Connexion
+            // dtp_date_fin_abo
             // 
-            this.Connexion.Controls.Add(this.button1);
-            this.Connexion.Controls.Add(this.label71);
-            this.Connexion.Controls.Add(this.txtmodepasse);
-            this.Connexion.Controls.Add(this.txtuser);
-            this.Connexion.Controls.Add(this.label70);
-            this.Connexion.Controls.Add(this.label69);
-            this.Connexion.Controls.Add(this.pictureBox1);
-            this.Connexion.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Connexion.Location = new System.Drawing.Point(4, 22);
-            this.Connexion.Name = "Connexion";
-            this.Connexion.Size = new System.Drawing.Size(1362, 723);
-            this.Connexion.TabIndex = 9;
-            this.Connexion.Text = "Connexion";
-            this.Connexion.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Mediateq_AP_SIO2.Properties.Resources.logo_c_;
-            this.pictureBox1.Location = new System.Drawing.Point(367, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(161, 128);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label69
-            // 
-            this.label69.AutoSize = true;
-            this.label69.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label69.ForeColor = System.Drawing.Color.BlueViolet;
-            this.label69.Location = new System.Drawing.Point(329, 175);
-            this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(138, 23);
-            this.label69.TabIndex = 1;
-            this.label69.Text = "Nom d\'utilisateur";
-            // 
-            // label70
-            // 
-            this.label70.AutoSize = true;
-            this.label70.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label70.ForeColor = System.Drawing.Color.BlueViolet;
-            this.label70.Location = new System.Drawing.Point(329, 252);
-            this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(111, 23);
-            this.label70.TabIndex = 2;
-            this.label70.Text = "Mot de passe";
-            // 
-            // txtuser
-            // 
-            this.txtuser.Location = new System.Drawing.Point(333, 210);
-            this.txtuser.Name = "txtuser";
-            this.txtuser.Size = new System.Drawing.Size(220, 29);
-            this.txtuser.TabIndex = 3;
-            // 
-            // txtmodepasse
-            // 
-            this.txtmodepasse.Location = new System.Drawing.Point(333, 288);
-            this.txtmodepasse.Name = "txtmodepasse";
-            this.txtmodepasse.PasswordChar = '*';
-            this.txtmodepasse.Size = new System.Drawing.Size(220, 29);
-            this.txtmodepasse.TabIndex = 4;
-            // 
-            // label71
-            // 
-            this.label71.AutoSize = true;
-            this.label71.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label71.Location = new System.Drawing.Point(399, 143);
-            this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(95, 22);
-            this.label71.TabIndex = 5;
-            this.label71.Text = "Mediateq";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(376, 337);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(118, 31);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Connexion";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.dtp_date_fin_abo.Location = new System.Drawing.Point(188, 321);
+            this.dtp_date_fin_abo.Name = "dtp_date_fin_abo";
+            this.dtp_date_fin_abo.Size = new System.Drawing.Size(121, 20);
+            this.dtp_date_fin_abo.TabIndex = 53;
             // 
             // FrmMediateq
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 749);
-            this.Controls.Add(this.tabOngletsApplication);
+            this.Controls.Add(this.Connexion);
             this.Name = "FrmMediateq";
             this.Text = "Gestion Médiathèque";
             this.Load += new System.EventHandler(this.FrmMediateq_Load);
-            this.tabOngletsApplication.ResumeLayout(false);
+            this.Connexion.ResumeLayout(false);
             this.tabParutions.ResumeLayout(false);
             this.tabParutions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParutions)).EndInit();
@@ -2310,16 +2208,13 @@ namespace Mediateq_AP_SIO2
             this.gpxCRUD_DVD2.PerformLayout();
             this.gpxCRUD_DVD.ResumeLayout(false);
             this.gpxCRUD_DVD.PerformLayout();
-            this.Connexion.ResumeLayout(false);
-            this.Connexion.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabOngletsApplication;
+        private System.Windows.Forms.TabControl Connexion;
         private System.Windows.Forms.TabPage tabParutions;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbxTitres;
@@ -2385,7 +2280,6 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.Button Modifier;
         private System.Windows.Forms.Button supprimer;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
@@ -2396,19 +2290,14 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox Aj_id;
         private System.Windows.Forms.Button Ajouter;
-        private System.Windows.Forms.TextBox Aj_date_fin_abo;
-        private System.Windows.Forms.TextBox Aj_date_premier_abo;
         private System.Windows.Forms.TextBox Aj_adresse_mail;
         private System.Windows.Forms.TextBox Aj_adresse;
-        private System.Windows.Forms.TextBox Aj_date_naiss;
         private System.Windows.Forms.TextBox Aj_tel;
         private System.Windows.Forms.TextBox Aj_prenom;
         private System.Windows.Forms.TextBox Aj_nom;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.TextBox modif_fin_abo;
-        private System.Windows.Forms.TextBox modif_date_premier_abonnement;
-        private System.Windows.Forms.TextBox modif_date_naissance;
         private System.Windows.Forms.TextBox modif_adresse_mail;
         private System.Windows.Forms.TextBox modif_adresse;
         private System.Windows.Forms.TextBox modif_prenom;
@@ -2531,14 +2420,11 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.Label label67;
         private System.Windows.Forms.Button btnSuppDvd;
         private System.Windows.Forms.Button btnModifDvd;
-        private System.Windows.Forms.TabPage Connexion;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label71;
-        private System.Windows.Forms.TextBox txtmodepasse;
-        private System.Windows.Forms.TextBox txtuser;
-        private System.Windows.Forms.Label label70;
-        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.DateTimePicker dtp_annee;
+        private System.Windows.Forms.DateTimePicker dtp_modif_annee;
+        private System.Windows.Forms.DateTimePicker dtp_premier_abo;
+        private System.Windows.Forms.DateTimePicker dtp_modif_date_premier_abo;
+        private System.Windows.Forms.DateTimePicker dtp_date_fin_abo;
     }
 }
 

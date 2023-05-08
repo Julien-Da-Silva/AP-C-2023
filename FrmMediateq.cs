@@ -187,12 +187,13 @@ namespace Mediateq_AP_SIO2
         
 
        //Bouton permettant d'ajouter un abonné
-        private void Ajouter_Click(object sender, EventArgs e)
+       /* private void Ajouter_Click(object sender, EventArgs e)
         {
-                Abonne abo = new Abonne(int.Parse(Aj_id.Text), Aj_nom.Text, Aj_prenom.Text, Aj_adresse.Text, int.Parse(Aj_tel.Text), Aj_adresse_mail.Text, Aj_date_naiss.Text, Aj_date_premier_abo.Text, Aj_date_fin_abo.Text);
+                DateTime dtpannee = dtp_annee.Value;
+                Abonne abo = new Abonne(int.Parse(Aj_id.Text), Aj_nom.Text, Aj_prenom.Text, Aj_adresse.Text, int.Parse(Aj_tel.Text), Aj_adresse_mail.Text, dtpannee, Aj_date_premier_abo.Text, Aj_date_fin_abo.Text);
                 DAODocuments.ajouterAbo(abo);
                 MessageBox.Show("Abonné ajouté");
-        }
+        }*/
 
         //Alimentation des ComboBox
         private void CRUD_abo_Enter(object sender, EventArgs e)
@@ -228,9 +229,9 @@ namespace Mediateq_AP_SIO2
                 string adresseModif = modif_adresse.Text;
                 int telModif = Int32.Parse(numericUpDown1.Text);
                 string adresseMailModif = modif_adresse_mail.Text;
-                string dateNaissanceModif = modif_date_naissance.Text;
-                string datePremierAboModif = modif_date_premier_abonnement.Text;
-                string dateFinAboModif = modif_fin_abo.Text;
+                DateTime dateNaissanceModif = dtp_modif_annee.Value;
+                DateTime datePremierAboModif = dtp_modif_date_premier_abo.Value;
+                DateTime dateFinAboModif = dtp_date_fin_abo.Value;
 
                 Abonne abonneModif = new Abonne(idModif, nomModif, prenomModif, adresseModif, telModif, adresseMailModif, dateNaissanceModif, datePremierAboModif, dateFinAboModif);
                 MessageBox.Show("Abonné modifé");
@@ -249,9 +250,9 @@ namespace Mediateq_AP_SIO2
             modif_adresse.Text = abonne.Adresse;
             numericUpDown1.Text = abonne.Tel.ToString();
             modif_adresse_mail.Text = abonne.Adresse_mail;
-            modif_date_naissance.Text = abonne.Date_naiss;
-            modif_date_premier_abonnement.Text = abonne.Date_premier_abo;
-            modif_fin_abo.Text = abonne.Date_fin_abo;  
+            dtp_modif_annee.Value = abonne.Date_naiss;
+            dtp_premier_abo.Value = abonne.Date_premier_abo;
+            dtp_date_fin_abo.Value = abonne.Date_fin_abo;  
         }
 
 
@@ -484,13 +485,29 @@ namespace Mediateq_AP_SIO2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string user = txtuser.Text;
-            string password = txtmodepasse.Text;
-
-            Login login = new Login(user, password);
-
-            DAODocuments.connexion(login);
+            
         }
+
+        private void Ajouter_Click_1(object sender, EventArgs e)
+        {
+            DateTime dtpannee = dtp_annee.Value;
+            DateTime dtpPremierAbo = dtp_premier_abo.Value;
+            DateTime dtpFinAbo = dtpPremierAbo.AddMonths(2);
+            Abonne abo = new Abonne(int.Parse(Aj_id.Text), Aj_nom.Text, Aj_prenom.Text, Aj_adresse.Text, int.Parse(Aj_tel.Text), Aj_adresse_mail.Text, dtpannee, dtpPremierAbo, dtpFinAbo);
+            DAODocuments.ajouterAbo(abo);
+            MessageBox.Show("Abonné ajouté");
+        }
+
+
+        /* private void Ajouter_Enter(object sender, EventArgs e)
+         {
+
+         }*/
+
+        /* private void gpxCRUD_DVD2_Enter(object sender, EventArgs e)
+         {
+
+         }*/
 
 
         //private void cbModifLivre_Enter(object sender, EventArgs e)

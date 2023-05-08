@@ -58,7 +58,7 @@ namespace Mediateq_AP_SIO2
 
             while (reader.Read())
             {
-                Abonne abonne = new Abonne(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), int.Parse(reader[4].ToString()), reader[5].ToString(), reader[6].ToString(), reader[7].ToString(), reader[8].ToString());
+                Abonne abonne = new Abonne(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), int.Parse(reader[4].ToString()), reader[5].ToString(), DateTime.Parse(reader[6].ToString()), DateTime.Parse(reader[7].ToString()), DateTime.Parse(reader[8].ToString()));
                 lesAbonnes.Add(abonne);
             }
             DAOFactory.deconnecter();
@@ -149,6 +149,24 @@ namespace Mediateq_AP_SIO2
             return lesDvd;
         }
 
+        public static List<Users> getAllUsers()
+        {
+            List<Users> lesUsers = new List<Users>();
+            string req = "Select * from users";
+
+            DAOFactory.connecter();
+
+            MySqlDataReader reader = DAOFactory.execSQLRead(req);
+
+            while (reader.Read())
+            {
+                Users users = new Users(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString());
+                lesUsers.Add(users);
+            }
+            DAOFactory.deconnecter();
+            return lesUsers;
+        }
+
         // public static void setDescripteurs(List<Livre> lesLivres)
         //{
         // DAOFactory.connecter();
@@ -193,11 +211,14 @@ namespace Mediateq_AP_SIO2
         }
 
         //Méthode permettant d'ajouter un abonné
-       public static void ajouterAbo(Abonne unAbonne)
+        public static void ajouterAbo(Abonne unAbonne)
         {
             try
             {
-                String query = "INSERT INTO abonnement (id, nom, prenom, adresse, tel, adresse_mail, date_naissance, date_premier_abonnement, date_fin_abo)" + "VALUES('" + int.Parse(unAbonne.Id.ToString()) + "','" + unAbonne.Nom.ToString() + "','" + unAbonne.Prenom.ToString() + "','" + unAbonne.Adresse.ToString() + "','" + int.Parse(unAbonne.Tel.ToString()) + "','" + unAbonne.Adresse_mail.ToString() + "','" + unAbonne.Date_naiss.ToString() + "','" + unAbonne.Date_premier_abo.ToString() + "','" + unAbonne.Date_fin_abo.ToString() + "')";
+                string date = unAbonne.Date_naiss.ToString("yyyy-MM-d");
+                string date1 = unAbonne.Date_premier_abo.ToString("yyyy-MM-d");
+                string date2 = unAbonne.Date_fin_abo.ToString("yyyy-MM-d");
+                String query = "INSERT INTO abonnement (id, nom, prenom, adresse, tel, adresse_mail, date_naissance, date_premier_abonnement, date_fin_abo)" + "VALUES('" + int.Parse(unAbonne.Id.ToString()) + "','" + unAbonne.Nom.ToString() + "','" + unAbonne.Prenom.ToString() + "','" + unAbonne.Adresse.ToString() + "','" + int.Parse(unAbonne.Tel.ToString()) + "','" + unAbonne.Adresse_mail.ToString() + "','" + date + "','" + date1 + "','" + date2 + "')";
                 DAOFactory.connecter();
                 DAOFactory.execSQLWrite(query);
                 DAOFactory.deconnecter();
@@ -208,14 +229,18 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+
         //Méthode permettant de mofifier un abonné
         public static void modifierAbo(Abonne unAbonne)
         {
             try
             {
-                String query = "UPDATE abonnement SET nom= '" + unAbonne.Nom.ToString() + "',prenom='" + unAbonne.Prenom.ToString() + "',adresse='" + unAbonne.Adresse.ToString() + "',tel='" + int.Parse(unAbonne.Tel.ToString()) + "',adresse_mail='" + unAbonne.Adresse_mail.ToString() + "',date_naissance='" + unAbonne.Date_naiss.ToString() + "',date_premier_abonnement='" + unAbonne.Date_premier_abo.ToString() + "',date_fin_abo='" + unAbonne.Date_fin_abo.ToString() + "' where id= '" + int.Parse(unAbonne.Id.ToString()) + "'";
+                string date = unAbonne.Date_naiss.ToString("yyyy-MM-d");
+                string date1 = unAbonne.Date_premier_abo.ToString("yyyy-MM-d");
+                string date2 = unAbonne.Date_fin_abo.ToString("yyyy-MM-d");
+                String query = "UPDATE abonnement SET nom= '" + unAbonne.Nom.ToString() + "',prenom='" + unAbonne.Prenom.ToString() + "',adresse='" + unAbonne.Adresse.ToString() + "',tel='" + int.Parse(unAbonne.Tel.ToString()) + "',adresse_mail='" + unAbonne.Adresse_mail.ToString() + "',date_naissance='" + date + "',date_premier_abonnement='" + date1 + "',date_fin_abo='" + date2 + "' where id= '" + int.Parse(unAbonne.Id.ToString()) + "'";
                 DAOFactory.connecter();
-                DAOFactory.execSQLWrite(query); 
+                DAOFactory.execSQLWrite(query);
                 DAOFactory.deconnecter();
             }
             catch (Exception e)
@@ -227,19 +252,19 @@ namespace Mediateq_AP_SIO2
 
         //Méthode permettant de supprimer un abonné
         public static void supAbo(Abonne unAbonne)
-    {
-        try
         {
-            String query = "DELETE FROM abonnement WHERE id ='"+unAbonne.Id+"'";
-            DAOFactory.connecter();
-            DAOFactory.execSQLWrite(query);
-            DAOFactory.deconnecter();
+            try
+            {
+                String query = "DELETE FROM abonnement WHERE id ='" + unAbonne.Id + "'";
+                DAOFactory.connecter();
+                DAOFactory.execSQLWrite(query);
+                DAOFactory.deconnecter();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("{0} Exception caught.", e);
+            }
         }
-        catch (Exception e)
-        {
-            Console.WriteLine("{0} Exception caught.", e);
-        }
-    }
 
         public static void ajouterExemplaire(Exemplaire unExemplaire)
         {
@@ -260,7 +285,7 @@ namespace Mediateq_AP_SIO2
         {
             try
             {
-                String req1 = "INSERT INTO document (id, titre, image, idCategorie) VALUES ('" + livre.IdDoc + "', '" + livre.Titre + "', '" + livre.Image + "', '" + livre . LaCategorie . Id + "')";
+                String req1 = "INSERT INTO document (id, titre, image, idCategorie) VALUES ('" + livre.IdDoc + "', '" + livre.Titre + "', '" + livre.Image + "', '" + livre.LaCategorie.Id + "')";
                 String req2 = "INSERT INTO livre (id, ISBN, auteur, collection) VALUES ('" + livre.IdDoc + "', '" + livre.ISBN1 + "', '" + livre.Auteur + "', '" + livre.LaCollection + "')";
                 DAOFactory.connecter();
                 DAOFactory.execSQLWrite(req1);
@@ -285,15 +310,15 @@ namespace Mediateq_AP_SIO2
                 DAOFactory.execSQLWrite(req2);
                 DAOFactory.deconnecter();
             }
-            catch ( Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("{0} Exception caught.", e);
             }
 
 
         }
-       
-        public static void suppLivre (Livre livre)
+
+        public static void suppLivre(Livre livre)
         {
             string req = "DELETE FROM livre WHERE id = '" + livre.IdDoc + "'";
             string req2 = "DELETE FROM document WHERE id = '" + livre.IdDoc + "'";
@@ -326,7 +351,7 @@ namespace Mediateq_AP_SIO2
             try
             {
                 string req = "UPDATE document SET id = '" + dvd.IdDoc + "', titre = '" + dvd.Titre + "', image = '" + dvd.Image + "', idCategorie = '" + dvd.LaCategorie.Id + "' WHERE id = '" + dvd.IdDoc + "'";
-                string req2 = "UPDATE livre SET id = '" + dvd.IdDoc + "', Synopsis = '" + dvd.Synopsis + "', réalisateur = '" + dvd.Realisateur + "', duree = '" + dvd.Duree + "' WHERE id = '" + dvd.IdDoc + "'";
+                string req2 = "UPDATE dvd SET id = '" + dvd.IdDoc + "', Synopsis = '" + dvd.Synopsis + "', réalisateur = '" + dvd.Realisateur + "', duree = '" + dvd.Duree + "' WHERE id = '" + dvd.IdDoc + "'";
 
                 DAOFactory.connecter();
                 DAOFactory.execSQLWrite(req);
@@ -352,16 +377,25 @@ namespace Mediateq_AP_SIO2
             DAOFactory.deconnecter();
         }
 
-        public static void connexion(Login login)
+        public static Users connex(string unUsername)
         {
-            string req = "SELECT COUNT(*) FROM login WHERE user='" + login.User + "' AND password = '" + login.Password + "' AND id =  '" + login.Id_login + "'";
 
-            DAOFactory.connecter();
-            DAOFactory.execSQLWrite(req);
-            DAOFactory.deconnecter();
+            {
+                Users user = null;
+                string req = "SELECT * FROM users WHERE username = '" + unUsername + "'";
+
+                DAOFactory.connecter();
+
+                MySqlDataReader reader = DAOFactory.execSQLRead(req);
+
+                while (reader.Read())
+                {
+                    user = new Users(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString());
+                }
+                DAOFactory.deconnecter();
+                return user;
+            }
         }
 
     }
-
-
 }
