@@ -397,5 +397,44 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+        public static int verifAbonne(Abonne unAbonne)
+        {
+            try
+            {
+                string date1 = unAbonne.Date_fin_abo.ToString("yyyy-MM-d");
+
+                int abone = 0;
+                string req = "SELECT DateDiff('" + date1 + "', DATE(NOW()))"
+;
+
+                DAOFactory.connecter();
+                DAOFactory.execSQLWrite(req);
+                MySqlDataReader reader = DAOFactory.execSQLRead(req);
+
+                while (reader.Read())
+                {
+
+
+
+                    abone = int.Parse(reader[0].ToString());
+
+
+                }
+
+                DAOFactory.deconnecter();
+                return abone;
+            }
+            catch (Exception e)
+            {
+                DAOFactory.deconnecter();
+
+                throw e;
+            }
+
+
+            DAOFactory.deconnecter();
+
+        }
+
     }
 }

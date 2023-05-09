@@ -498,6 +498,30 @@ namespace Mediateq_AP_SIO2
             MessageBox.Show("Abonné ajouté");
         }
 
+        /*private void verifDate_Enter(object sender, EventArgs e)
+        {
+            dtp_date_fin_abo
+        }*/
+
+        private void verifDate_Click(object sender, EventArgs e)
+        {
+            
+             Abonne abonne = (Abonne)cb_modif.SelectedItem;
+
+            int verif = DAODocuments.verifAbonne(abonne);
+
+            if (verif < 30)
+            {
+                MessageBox.Show("il lui reste " + verif.ToString() + " jour avant la fin de sont abonnement, il faudra le renouveller");
+
+            }
+            else
+            {
+                MessageBox.Show("il lui reste " + verif.ToString() + " jour avant la fin de sont abonnement");
+
+            }
+        }
+
 
         /* private void Ajouter_Enter(object sender, EventArgs e)
          {
