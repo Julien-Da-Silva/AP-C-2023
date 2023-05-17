@@ -108,7 +108,7 @@ namespace Mediateq_AP_SIO2
             List<Livre> lesLivres = new List<Livre>();
 
             {
-                string req = "Select l.id, l.ISBN, l.auteur, d.titre, d.image, l.collection, d.idCategorie, c.libelle from livre l join document d on l.id = d.id join categorie c on d.idCategorie = c.id";
+                string req = "Select l.id,d.titre, l.ISBN, l.auteur,l.collection, d.image, d.idCategorie, c.libelle from livre l join document d on l.id = d.id join categorie c on d.idCategorie = c.id";
 
                 DAOFactory.connecter();
 

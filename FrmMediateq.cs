@@ -208,7 +208,6 @@ namespace Mediateq_AP_SIO2
 
             // Validation du format du prénom et du nom
             Regex regexNomPrenom = new Regex(@"^[A-Za-z\s]+$");
-
             if (!regexNomPrenom.IsMatch(Aj_nom.Text) || !regexNomPrenom.IsMatch(Aj_prenom.Text))
             {
                 MessageBox.Show("Le prénom et le nom doivent contenir uniquement des lettres.");
@@ -231,14 +230,23 @@ namespace Mediateq_AP_SIO2
                 return;
             }
 
+
+            if (string.IsNullOrEmpty(Aj_id.Text) || string.IsNullOrEmpty(Aj_nom.Text) || string.IsNullOrEmpty(Aj_prenom.Text) || string.IsNullOrEmpty(Aj_adresse.Text) || string.IsNullOrEmpty(Aj_tel.Text) || string.IsNullOrEmpty(Aj_adresse_mail.Text))
+            {
+                Ajouter.Enabled = false;
+                return;
+            }
+
+            Ajouter.Enabled = true;
+
             DateTime dtpannee = dtp_annee.Value;
             DateTime dtpPremierAbo = dtp_premier_abo.Value;
             DateTime dtpFinAbo = dtpPremierAbo.AddMonths(2);
             Abonne abo = new Abonne(int.Parse(Aj_id.Text), Aj_nom.Text, Aj_prenom.Text, Aj_adresse.Text, int.Parse(Aj_tel.Text), Aj_adresse_mail.Text, dtpannee, dtpPremierAbo, dtpFinAbo);
             DAODocuments.ajouterAbo(abo);
             MessageBox.Show("Abonné ajouté");
-
         }
+
 
         //Alimentation des ComboBox
         private void CRUD_abo_Enter(object sender, EventArgs e)
@@ -296,6 +304,14 @@ namespace Mediateq_AP_SIO2
                 MessageBox.Show("Le prénom et le nom doivent contenir uniquement des lettres.");
                 return;
             }
+
+            Regex regexTelephone = new Regex(@"^0[1-9](?:\d{2}){4}$");
+            if (!regexTelephone.IsMatch(txt_modif_tel.Text))
+            {
+                MessageBox.Show("Numéro de téléphone invalide. Veuillez entrer un numéro de téléphone français valide au format XX XX XX XX XX.");
+                return;
+            }
+
 
             // Le reste du code pour la modification de l'abonné...
 
@@ -373,6 +389,8 @@ namespace Mediateq_AP_SIO2
 
         private void btnAjouter_livre_Enter(object sender, EventArgs e)
         {
+
+
             lesLivres = DAODocuments.getAllLivres();
             string IDLivre = txtLivre_id.Text;
             string ISBNLivre = txtLivre_ISBN.Text;
@@ -381,6 +399,46 @@ namespace Mediateq_AP_SIO2
             string ImageLivre = txtLivre_image.Text;
             string uneCollection = txtLivre_collection.Text;
             Categorie uneCategorie = (Categorie)cbx_livre.SelectedItem;
+
+            // Validation de l'ID du livre (uniquement des chiffres)
+            Regex regexIDLivre = new Regex(@"^\d+$");
+            if (!regexIDLivre.IsMatch(IDLivre))
+            {
+                MessageBox.Show("ID du livre invalide. Utilisez uniquement des chiffres.");
+                return;
+            }
+
+            // Validation de l'ISBN du livre (chiffres et tirets)
+            Regex regexISBNLivre = new Regex(@"^\d{13}$");
+            if (!regexISBNLivre.IsMatch(ISBNLivre))
+            {
+                MessageBox.Show("ISBN du livre invalide. Utilisez un format valide (10 chiffres ou 9 chiffres et la lettre 'X' en dernière position).");
+                return;
+            }
+
+            // Validation de l'auteur du livre (lettres, espaces et éventuellement d'autres caractères spéciaux)
+            Regex regexAuteurLivre = new Regex(@"^[A-Za-z\s-]+$");
+            if (!regexAuteurLivre.IsMatch(AuteurLivre))
+            {
+                MessageBox.Show("Auteur du livre invalide. Utilisez uniquement des lettres et des espaces.");
+                return;
+            }
+
+            // Validation du titre du livre (lettres, chiffres, espaces et éventuellement d'autres caractères spéciaux)
+            Regex regexTitreLivre = new Regex(@"^[A-Za-z0-9\s\p{P}-]+$");
+            if (!regexTitreLivre.IsMatch(TitreLivre))
+            {
+                MessageBox.Show("Titre du livre invalide. Utilisez uniquement des lettres, des chiffres et des espaces.");
+                return;
+            }
+
+            // Validation de la collection du livre (lettres, chiffres, espaces et éventuellement d'autres caractères spéciaux)
+            Regex regexCollection = new Regex(@"^[A-Za-z0-9\s\p{P}-]+$");
+            if (!regexCollection.IsMatch(uneCollection))
+            {
+                MessageBox.Show("Collection du livre invalide. Utilisez uniquement des lettres, des chiffres et des espaces.");
+                return;
+            }
 
             Livre livre1 = new Livre(IDLivre, TitreLivre, ISBNLivre, AuteurLivre, uneCollection, ImageLivre, uneCategorie);
             DAODocuments.ajoutLivre(livre1);
@@ -395,7 +453,7 @@ namespace Mediateq_AP_SIO2
             cbxModifCateg.DataSource = lesCategories;
             cbxModifCateg.DisplayMember = "libelle";
             cbModifLivre.DataSource = lesLivres;
-            cbModifLivre.DisplayMember = "auteur";
+            cbModifLivre.DisplayMember = "titre";
 
             lesLivres = DAODocuments.getAllLivres();
 
@@ -448,16 +506,52 @@ namespace Mediateq_AP_SIO2
         private void btnModifLivre_Enter(object sender, EventArgs e)
         {
             string idLivreModif = txtBoxModifLivreId.Text;
+            string titreLivreModif = txtBoxModifLivreTitre.Text;
             string ISBNLivreModif = txtBoxModifLivreISBN.Text;
             string auteurLivreModif = txtBoxModifLivreAuteur.Text;
-            string titreLivreModif = txtBoxModifLivreTitre.Text;
-            string imageLivreModif = txtBoxModifLivreImage.Text;
             string collectionLivreModif = txtBoxModifLivreCollection.Text;
+            string imageLivreModif = txtBoxModifLivreImage.Text;
             Categorie categorieModifLivre = (Categorie)cbxModifCateg.SelectedItem;
 
-            Livre livre = new Livre(idLivreModif, ISBNLivreModif, auteurLivreModif, titreLivreModif, imageLivreModif, collectionLivreModif, categorieModifLivre);
+            // Validation de l'ID du livre (uniquement des chiffres)
+            Regex regexIDLivreModif = new Regex(@"^\d+$");
+            if (!regexIDLivreModif.IsMatch(idLivreModif))
+            {
+                MessageBox.Show("ID du livre invalide. Utilisez uniquement des chiffres.");
+                return;
+            }
+
+            // Validation de l'ISBN du livre (chiffres et tirets)
+            Regex regexISBNLivreModif = new Regex(@"^\d{13}$");
+            if (!regexISBNLivreModif.IsMatch(ISBNLivreModif))
+            {
+                MessageBox.Show("ISBN du livre invalide. Le format de 'ISBN doit être composé de 13 chiffres.");
+                return;
+            }
+
+            // Validation de l'auteur du livre (lettres, espaces et tirets)
+            Regex regexAuteurLivreModif = new Regex(@"^[A-Za-z\s-]+$");
+            if (!regexAuteurLivreModif.IsMatch(auteurLivreModif))
+            {
+                MessageBox.Show("Auteur du livre invalide. Utilisez uniquement des lettres, des espaces et des tirets.");
+                return;
+            }
+
+            // Validation du titre du livre (lettres, chiffres, espaces et tirets)
+            Regex regexTitreLivreModif = new Regex(@"^[A-Za-z0-9\s-]+$");
+            if (!regexTitreLivreModif.IsMatch(titreLivreModif))
+            {
+                MessageBox.Show("Titre du livre invalide. Utilisez uniquement des lettres, des chiffres, des espaces et des tirets.");
+                return;
+            }
+
+            // Le reste du code pour la modification du livre...
+
+
+            Livre livre = new Livre(idLivreModif, titreLivreModif, ISBNLivreModif, auteurLivreModif, collectionLivreModif, imageLivreModif, categorieModifLivre);
 
             DAODocuments.modifLivre(livre);
+            MessageBox.Show("livre modifié");
 
             lesLivres = DAODocuments.getAllLivres();
 
@@ -483,20 +577,61 @@ namespace Mediateq_AP_SIO2
         }
 
         private void btnAjout_DVD_Enter(object sender, EventArgs e)
+    {
+        lesDVD = DAODocuments.getAllDVD();
+        string IDDVD = txtDvd_id.Text;
+        string TitreDVD = txtDvd_Titre.Text;
+        string ImageDVD = txtDvd_Image.Text;
+        string SynopsisDVD = txtDvd_Synopsis.Text;
+        string RealisateurDVD = txtDvd_Realisateur.Text;
+        int DureeDVD = 0;
+        if (!int.TryParse(txtDvd_Duree.Text, out DureeDVD))
         {
-            lesDVD = DAODocuments.getAllDVD();
-            string IDDVD = txtDvd_id.Text;
-            string TitreDVD = txtDvd_Titre.Text;
-            string ImageDVD = txtDvd_Image.Text;
-            string SynopsisDVD = txtDvd_Synopsis.Text;
-            string RealisateurDVD = txtDvd_Realisateur.Text;
-            int DureeDVD = Int32.Parse(txtDvd_Duree.Text);
-            Categorie uneCategorie = (Categorie)cbx_categDVD.SelectedItem;
-
-            DVD dvd1 = new DVD(IDDVD, TitreDVD, SynopsisDVD , RealisateurDVD, DureeDVD, ImageDVD , uneCategorie);
-            DAODocuments.ajoutDVD(dvd1);
-            MessageBox.Show("dvd ajouté");
+            MessageBox.Show("Durée du DVD invalide. Veuillez entrer une durée valide (nombre entier).");
+            return;
         }
+        Categorie uneCategorie = (Categorie)cbx_categDVD.SelectedItem;
+
+        Regex regexIDDVD = new Regex(@"^[a-zA-Z0-9]+$");
+        if (!regexIDDVD.IsMatch(IDDVD))
+        {
+            MessageBox.Show("ID du DVD invalide. L'ID doit être composé de caractères alphanumériques.");
+            return;
+        }
+
+        Regex regexTitreDVD = new Regex(@"^.+$");
+        if (!regexTitreDVD.IsMatch(TitreDVD))
+        {
+            MessageBox.Show("Titre du DVD invalide. Veuillez entrer un titre valide.");
+            return;
+        }
+
+        Regex regexSynopsisDVD = new Regex(@"^.+$");
+        if (!regexSynopsisDVD.IsMatch(SynopsisDVD))
+        {
+            MessageBox.Show("Synopsis du DVD invalide. Veuillez entrer un synopsis valide.");
+            return;
+        }
+        Regex regexRealisateurDVD = new Regex(@"^[a-zA-Z\s]+$");
+        if (!regexRealisateurDVD.IsMatch(RealisateurDVD))
+        {
+            MessageBox.Show("Réalisateur du DVD invalide. Veuillez entrer un réalisateur valide sans caractères spéciaux.");
+            return;
+        } 
+
+            if (string.IsNullOrEmpty(IDDVD) || string.IsNullOrEmpty(TitreDVD) || string.IsNullOrEmpty(SynopsisDVD) || string.IsNullOrEmpty(RealisateurDVD) || string.IsNullOrEmpty(txtDvd_Duree.Text))
+        {
+            btnAjout_DVD.Enabled = false;
+            return;
+        }
+
+        btnAjout_DVD.Enabled = true;
+
+        DVD dvd1 = new DVD(IDDVD, TitreDVD, SynopsisDVD, RealisateurDVD, DureeDVD, ImageDVD, uneCategorie);
+        DAODocuments.ajoutDVD(dvd1);
+        MessageBox.Show("DVD ajouté");
+    }
+
 
         private void cbx_ModifDvd_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -583,6 +718,20 @@ namespace Mediateq_AP_SIO2
             {
                 MessageBox.Show("Il reste " + verif.ToString() + " jour(s) avant la fin de son abonnement.");
             }
+        }
+
+        private void btnRefreshLivre_Click(object sender, EventArgs e)
+        {
+            //DataGrid vidé
+            dgvLivre.Rows.Clear();
+
+            //Rafraîchissement de la collection
+            lesLivres = DAODocuments.getAllLivres();
+            foreach (Livre livre in lesLivres )
+            {
+                dgvLivre.Rows.Add(livre.IdDoc, livre.Auteur, livre.Titre, livre.ISBN1, livre.LaCollection, livre.Image, livre.LaCategorie);
+            }
+            dgvLivre.Refresh();
         }
 
 
