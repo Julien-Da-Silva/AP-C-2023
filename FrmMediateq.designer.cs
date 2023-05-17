@@ -82,7 +82,6 @@ namespace Mediateq_AP_SIO2
             this.Realisateur = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Duree = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CRUD_abo = new System.Windows.Forms.TabPage();
-            this.verifDate = new System.Windows.Forms.Button();
             this.dtp_premier_abo = new System.Windows.Forms.DateTimePicker();
             this.dtp_annee = new System.Windows.Forms.DateTimePicker();
             this.Refresh = new System.Windows.Forms.Button();
@@ -97,13 +96,14 @@ namespace Mediateq_AP_SIO2
             this.datePremierAbo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateFinAbo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.verifDate = new System.Windows.Forms.Button();
             this.dtp_date_fin_abo = new System.Windows.Forms.DateTimePicker();
             this.dtp_modif_date_premier_abo = new System.Windows.Forms.DateTimePicker();
             this.dtp_modif_annee = new System.Windows.Forms.DateTimePicker();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label33 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
+            this.Modifier = new System.Windows.Forms.Button();
             this.label30 = new System.Windows.Forms.Label();
             this.modif_adresse_mail = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
@@ -118,7 +118,6 @@ namespace Mediateq_AP_SIO2
             this.cb_modif = new System.Windows.Forms.ComboBox();
             this.modif_id = new System.Windows.Forms.TextBox();
             this.cbSupp = new System.Windows.Forms.ComboBox();
-            this.Modifier = new System.Windows.Forms.Button();
             this.supprimer = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -240,6 +239,7 @@ namespace Mediateq_AP_SIO2
             this.txtDvd_id = new System.Windows.Forms.TextBox();
             this.cbx_categDVD = new System.Windows.Forms.ComboBox();
             this.customInstaller1 = new MySql.Data.MySqlClient.CustomInstaller();
+            this.txt_modif_tel = new System.Windows.Forms.TextBox();
             this.Connexion.SuspendLayout();
             this.tabParutions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParutions)).BeginInit();
@@ -254,7 +254,6 @@ namespace Mediateq_AP_SIO2
             this.CRUD_abo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAbo)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAbonne)).BeginInit();
             this.exemplaire.SuspendLayout();
@@ -790,20 +789,10 @@ namespace Mediateq_AP_SIO2
             this.CRUD_abo.UseVisualStyleBackColor = true;
             this.CRUD_abo.Enter += new System.EventHandler(this.CRUD_abo_Enter);
             // 
-            // verifDate
-            // 
-            this.verifDate.Location = new System.Drawing.Point(158, 346);
-            this.verifDate.Name = "verifDate";
-            this.verifDate.Size = new System.Drawing.Size(75, 23);
-            this.verifDate.TabIndex = 47;
-            this.verifDate.Text = "Verif abo";
-            this.verifDate.UseVisualStyleBackColor = true;
-            this.verifDate.Click += new System.EventHandler(this.verifDate_Click);
-            // 
             // dtp_premier_abo
             // 
             this.dtp_premier_abo.Enabled = false;
-            this.dtp_premier_abo.Location = new System.Drawing.Point(175, 267);
+            this.dtp_premier_abo.Location = new System.Drawing.Point(167, 266);
             this.dtp_premier_abo.MaxDate = new System.DateTime(2024, 1, 1, 0, 0, 0, 0);
             this.dtp_premier_abo.MinDate = new System.DateTime(2023, 5, 8, 0, 0, 0, 0);
             this.dtp_premier_abo.Name = "dtp_premier_abo";
@@ -893,11 +882,11 @@ namespace Mediateq_AP_SIO2
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txt_modif_tel);
             this.groupBox1.Controls.Add(this.verifDate);
             this.groupBox1.Controls.Add(this.dtp_date_fin_abo);
             this.groupBox1.Controls.Add(this.dtp_modif_date_premier_abo);
             this.groupBox1.Controls.Add(this.dtp_modif_annee);
-            this.groupBox1.Controls.Add(this.numericUpDown1);
             this.groupBox1.Controls.Add(this.label33);
             this.groupBox1.Controls.Add(this.label32);
             this.groupBox1.Controls.Add(this.label31);
@@ -922,6 +911,16 @@ namespace Mediateq_AP_SIO2
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
             // 
+            // verifDate
+            // 
+            this.verifDate.Location = new System.Drawing.Point(158, 346);
+            this.verifDate.Name = "verifDate";
+            this.verifDate.Size = new System.Drawing.Size(75, 23);
+            this.verifDate.TabIndex = 47;
+            this.verifDate.Text = "Verif abo";
+            this.verifDate.UseVisualStyleBackColor = true;
+            this.verifDate.Click += new System.EventHandler(this.verifDate_Click);
+            // 
             // dtp_date_fin_abo
             // 
             this.dtp_date_fin_abo.Location = new System.Drawing.Point(189, 311);
@@ -942,18 +941,6 @@ namespace Mediateq_AP_SIO2
             this.dtp_modif_annee.Name = "dtp_modif_annee";
             this.dtp_modif_annee.Size = new System.Drawing.Size(121, 20);
             this.dtp_modif_annee.TabIndex = 46;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(189, 176);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            410065408,
-            2,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 45;
             // 
             // label33
             // 
@@ -981,6 +968,16 @@ namespace Mediateq_AP_SIO2
             this.label31.Size = new System.Drawing.Size(69, 13);
             this.label31.TabIndex = 38;
             this.label31.Text = "date_fin_abo";
+            // 
+            // Modifier
+            // 
+            this.Modifier.Location = new System.Drawing.Point(256, 346);
+            this.Modifier.Name = "Modifier";
+            this.Modifier.Size = new System.Drawing.Size(75, 23);
+            this.Modifier.TabIndex = 30;
+            this.Modifier.Text = "Modifier";
+            this.Modifier.UseVisualStyleBackColor = true;
+            this.Modifier.Click += new System.EventHandler(this.Modifier_Click);
             // 
             // label30
             // 
@@ -1097,16 +1094,6 @@ namespace Mediateq_AP_SIO2
             this.cbSupp.Name = "cbSupp";
             this.cbSupp.Size = new System.Drawing.Size(121, 21);
             this.cbSupp.TabIndex = 39;
-            // 
-            // Modifier
-            // 
-            this.Modifier.Location = new System.Drawing.Point(256, 346);
-            this.Modifier.Name = "Modifier";
-            this.Modifier.Size = new System.Drawing.Size(75, 23);
-            this.Modifier.TabIndex = 30;
-            this.Modifier.Text = "Modifier";
-            this.Modifier.UseVisualStyleBackColor = true;
-            this.Modifier.Click += new System.EventHandler(this.Modifier_Click);
             // 
             // supprimer
             // 
@@ -2165,6 +2152,13 @@ namespace Mediateq_AP_SIO2
             this.cbx_categDVD.Size = new System.Drawing.Size(121, 21);
             this.cbx_categDVD.TabIndex = 1;
             // 
+            // txt_modif_tel
+            // 
+            this.txt_modif_tel.Location = new System.Drawing.Point(189, 176);
+            this.txt_modif_tel.Name = "txt_modif_tel";
+            this.txt_modif_tel.Size = new System.Drawing.Size(100, 20);
+            this.txt_modif_tel.TabIndex = 47;
+            // 
             // FrmMediateq
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2194,7 +2188,6 @@ namespace Mediateq_AP_SIO2
             ((System.ComponentModel.ISupportInitialize)(this.dataGridAbo)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAbonne)).EndInit();
             this.exemplaire.ResumeLayout(false);
@@ -2328,7 +2321,6 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private System.Windows.Forms.Button Refresh;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.TabPage exemplaire;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button ajouter_exemplaire;
@@ -2428,6 +2420,7 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.DateTimePicker dtp_modif_date_premier_abo;
         private System.Windows.Forms.DateTimePicker dtp_date_fin_abo;
         private System.Windows.Forms.Button verifDate;
+        private System.Windows.Forms.TextBox txt_modif_tel;
     }
 }
 

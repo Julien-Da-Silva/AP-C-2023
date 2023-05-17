@@ -29,7 +29,7 @@ namespace Mediateq_AP_SIO2
                 new FrmMediateq().Show();
             } else
             {
-                MessageBox.Show("Nom d'utilisateur ou mot de passe invalide" +passwordHash, "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Nom d'utilisateur ou mot de passe invalide" , "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         /*BitConverter.ToString(new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(txtPassword.Text))).Replace("-", "");*/

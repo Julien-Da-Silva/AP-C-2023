@@ -46,7 +46,7 @@ namespace Mediateq_AP_SIO2
             this.button1.BackColor = System.Drawing.Color.White;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.button1.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.BlueViolet;
+            this.button1.ForeColor = System.Drawing.Color.DarkBlue;
             this.button1.Location = new System.Drawing.Point(295, 400);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(216, 41);
@@ -56,7 +56,7 @@ namespace Mediateq_AP_SIO2
             // 
             // Register
             // 
-            this.Register.BackColor = System.Drawing.Color.BlueViolet;
+            this.Register.BackColor = System.Drawing.Color.DarkBlue;
             this.Register.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.Register.Font = new System.Drawing.Font("Nirmala UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Register.ForeColor = System.Drawing.Color.Transparent;
@@ -72,7 +72,7 @@ namespace Mediateq_AP_SIO2
             // 
             this.CheckbxShowPas.AutoSize = true;
             this.CheckbxShowPas.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CheckbxShowPas.ForeColor = System.Drawing.Color.Azure;
+            this.CheckbxShowPas.ForeColor = System.Drawing.Color.Black;
             this.CheckbxShowPas.Location = new System.Drawing.Point(295, 317);
             this.CheckbxShowPas.Name = "CheckbxShowPas";
             this.CheckbxShowPas.Size = new System.Drawing.Size(118, 21);
@@ -83,11 +83,12 @@ namespace Mediateq_AP_SIO2
             // txtPassword
             // 
             this.txtPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(231)))), ((int)(((byte)(233)))));
-            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPassword.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.Location = new System.Drawing.Point(295, 272);
             this.txtPassword.Multiline = true;
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(216, 28);
             this.txtPassword.TabIndex = 16;
             // 
@@ -95,7 +96,7 @@ namespace Mediateq_AP_SIO2
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Azure;
+            this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(292, 242);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 19);
@@ -115,8 +116,9 @@ namespace Mediateq_AP_SIO2
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Azure;
+            this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(292, 172);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 19);
@@ -127,7 +129,7 @@ namespace Mediateq_AP_SIO2
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Azure;
+            this.label1.ForeColor = System.Drawing.Color.DarkBlue;
             this.label1.Location = new System.Drawing.Point(320, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(155, 27);
@@ -148,7 +150,7 @@ namespace Mediateq_AP_SIO2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.CadetBlue;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(839, 534);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button1);

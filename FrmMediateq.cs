@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Mediateq_AP_SIO2.metier;
+using System.Text.RegularExpressions;
 
 
 namespace Mediateq_AP_SIO2
@@ -184,16 +185,60 @@ namespace Mediateq_AP_SIO2
 
         #endregion
 
-        
 
-       //Bouton permettant d'ajouter un abonné
-       /* private void Ajouter_Click(object sender, EventArgs e)
+
+        //Bouton permettant d'ajouter un abonné
+        /* private void Ajouter_Click(object sender, EventArgs e)
+         {
+                 DateTime dtpannee = dtp_annee.Value;
+                 Abonne abo = new Abonne(int.Parse(Aj_id.Text), Aj_nom.Text, Aj_prenom.Text, Aj_adresse.Text, int.Parse(Aj_tel.Text), Aj_adresse_mail.Text, dtpannee, Aj_date_premier_abo.Text, Aj_date_fin_abo.Text);
+                 DAODocuments.ajouterAbo(abo);
+                 MessageBox.Show("Abonné ajouté");
+         }*/
+
+        private void Ajouter_Click_1(object sender, EventArgs e)
         {
-                DateTime dtpannee = dtp_annee.Value;
-                Abonne abo = new Abonne(int.Parse(Aj_id.Text), Aj_nom.Text, Aj_prenom.Text, Aj_adresse.Text, int.Parse(Aj_tel.Text), Aj_adresse_mail.Text, dtpannee, Aj_date_premier_abo.Text, Aj_date_fin_abo.Text);
-                DAODocuments.ajouterAbo(abo);
-                MessageBox.Show("Abonné ajouté");
-        }*/
+            // Validation de l'ID (uniquement des chiffres)
+            Regex regexId = new Regex(@"^\d+$");
+            if (!regexId.IsMatch(Aj_id.Text))
+            {
+                MessageBox.Show("ID invalide. Utilisez uniquement des chiffres.");
+                return;
+            }
+
+            // Validation du format du prénom et du nom
+            Regex regexNomPrenom = new Regex(@"^[A-Za-z\s]+$");
+
+            if (!regexNomPrenom.IsMatch(Aj_nom.Text) || !regexNomPrenom.IsMatch(Aj_prenom.Text))
+            {
+                MessageBox.Show("Le prénom et le nom doivent contenir uniquement des lettres.");
+                return;
+            }
+
+            // Validation de l'adresse
+            Regex regexAdresse = new Regex(@"^[A-Za-z0-9\s]+$");
+            if (!regexAdresse.IsMatch(Aj_adresse.Text))
+            {
+                MessageBox.Show("Adresse invalide. Utilisez uniquement des lettres, des chiffres et des espaces.");
+                return;
+            }
+
+            // Validation de l'adresse e-mail
+            Regex regexEmail = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            if (!regexEmail.IsMatch(Aj_adresse_mail.Text))
+            {
+                MessageBox.Show("Adresse e-mail invalide.");
+                return;
+            }
+
+            DateTime dtpannee = dtp_annee.Value;
+            DateTime dtpPremierAbo = dtp_premier_abo.Value;
+            DateTime dtpFinAbo = dtpPremierAbo.AddMonths(2);
+            Abonne abo = new Abonne(int.Parse(Aj_id.Text), Aj_nom.Text, Aj_prenom.Text, Aj_adresse.Text, int.Parse(Aj_tel.Text), Aj_adresse_mail.Text, dtpannee, dtpPremierAbo, dtpFinAbo);
+            DAODocuments.ajouterAbo(abo);
+            MessageBox.Show("Abonné ajouté");
+
+        }
 
         //Alimentation des ComboBox
         private void CRUD_abo_Enter(object sender, EventArgs e)
@@ -221,23 +266,45 @@ namespace Mediateq_AP_SIO2
         }
 
         // Bouton appelant la méthode modifierAbo permettant d'effectuer la modification de l'abonné
-       private void Modifier_Click(object sender, EventArgs e)
+
+        private void Modifier_Click(object sender, EventArgs e)
         {
-                int idModif = Int32.Parse(modif_id.Text);
-                string nomModif = modif_nom.Text;
-                string prenomModif = modif_prenom.Text;
-                string adresseModif = modif_adresse.Text;
-                int telModif = Int32.Parse(numericUpDown1.Text);
-                string adresseMailModif = modif_adresse_mail.Text;
-                DateTime dateNaissanceModif = dtp_modif_annee.Value;
-                DateTime datePremierAboModif = dtp_modif_date_premier_abo.Value;
-                DateTime dateFinAboModif = dtp_date_fin_abo.Value;
+            int idModif = Int32.Parse(modif_id.Text);
+            string nomModif = modif_nom.Text;
+            string prenomModif = modif_prenom.Text;
+            string adresseModif = modif_adresse.Text;
+            int telModif = Int32.Parse(txt_modif_tel.Text);
+            string adresseMailModif = modif_adresse_mail.Text;
+            DateTime dateNaissanceModif = dtp_modif_annee.Value;
+            DateTime datePremierAboModif = dtp_modif_date_premier_abo.Value;
+            DateTime dateFinAboModif = dtp_date_fin_abo.Value;
 
-                Abonne abonneModif = new Abonne(idModif, nomModif, prenomModif, adresseModif, telModif, adresseMailModif, dateNaissanceModif, datePremierAboModif, dateFinAboModif);
-                MessageBox.Show("Abonné modifé");
+            // Utilisation des regex pour la validation
 
-               DAODocuments.modifierAbo(abonneModif);     
+            // Validation de l'adresse e-mail
+            Regex regexEmail = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            if (!regexEmail.IsMatch(adresseMailModif))
+            {
+                MessageBox.Show("Adresse e-mail invalide.");
+                return;
+            }
+
+            // Validation du format du prénom et du nom
+            Regex regexNomPrenom = new Regex(@"^[A-Za-z\s]+$");
+            if (!regexNomPrenom.IsMatch(nomModif) || !regexNomPrenom.IsMatch(prenomModif))
+            {
+                MessageBox.Show("Le prénom et le nom doivent contenir uniquement des lettres.");
+                return;
+            }
+
+            // Le reste du code pour la modification de l'abonné...
+
+            Abonne abonneModif = new Abonne(idModif, nomModif, prenomModif, adresseModif, telModif, adresseMailModif, dateNaissanceModif, datePremierAboModif, dateFinAboModif);
+            MessageBox.Show("Abonné modifié");
+
+            DAODocuments.modifierAbo(abonneModif);
         }
+
 
 
         private void cb_modif_SelectedIndexChanged(object sender, EventArgs e)
@@ -248,7 +315,7 @@ namespace Mediateq_AP_SIO2
             modif_nom.Text = abonne.Nom;
             modif_prenom.Text = abonne.Prenom;
             modif_adresse.Text = abonne.Adresse;
-            numericUpDown1.Text = abonne.Tel.ToString();
+            txt_modif_tel.Text = abonne.Tel.ToString();
             modif_adresse_mail.Text = abonne.Adresse_mail;
             dtp_modif_annee.Value = abonne.Date_naiss;
             dtp_premier_abo.Value = abonne.Date_premier_abo;
@@ -488,15 +555,6 @@ namespace Mediateq_AP_SIO2
             
         }
 
-        private void Ajouter_Click_1(object sender, EventArgs e)
-        {
-            DateTime dtpannee = dtp_annee.Value;
-            DateTime dtpPremierAbo = dtp_premier_abo.Value;
-            DateTime dtpFinAbo = dtpPremierAbo.AddMonths(2);
-            Abonne abo = new Abonne(int.Parse(Aj_id.Text), Aj_nom.Text, Aj_prenom.Text, Aj_adresse.Text, int.Parse(Aj_tel.Text), Aj_adresse_mail.Text, dtpannee, dtpPremierAbo, dtpFinAbo);
-            DAODocuments.ajouterAbo(abo);
-            MessageBox.Show("Abonné ajouté");
-        }
 
         /*private void verifDate_Enter(object sender, EventArgs e)
         {
@@ -505,20 +563,25 @@ namespace Mediateq_AP_SIO2
 
         private void verifDate_Click(object sender, EventArgs e)
         {
-            
-             Abonne abonne = (Abonne)cb_modif.SelectedItem;
 
-            int verif = DAODocuments.verifAbonne(abonne);
+            Abonne abonne = (Abonne)cb_modif.SelectedItem;
+            DateTime dateFinAbo = abonne.Date_fin_abo;
 
-            if (verif < 30)
+            // Calcul du nombre de jours restants avant la fin de l'abonnement
+            TimeSpan difference = dateFinAbo - DateTime.Today;
+            int verif = difference.Days;
+
+            if (verif <= 0)
             {
-                MessageBox.Show("il lui reste " + verif.ToString() + " jour avant la fin de sont abonnement, il faudra le renouveller");
-
+                MessageBox.Show("L'abonnement de cet abonné a expiré.");
+            }
+            else if (verif < 30)
+            {
+                MessageBox.Show("Il reste " + verif.ToString() + " jour(s) avant la fin de son abonnement. Il faudra le renouveler.");
             }
             else
             {
-                MessageBox.Show("il lui reste " + verif.ToString() + " jour avant la fin de sont abonnement");
-
+                MessageBox.Show("Il reste " + verif.ToString() + " jour(s) avant la fin de son abonnement.");
             }
         }
 
