@@ -198,13 +198,6 @@ namespace Mediateq_AP_SIO2
 
         private void Ajouter_Click_1(object sender, EventArgs e)
         {
-            // Validation de l'ID (uniquement des chiffres)
-            Regex regexId = new Regex(@"^\d+$");
-            if (!regexId.IsMatch(Aj_id.Text))
-            {
-                MessageBox.Show("ID invalide. Utilisez uniquement des chiffres.");
-                return;
-            }
 
             // Validation du format du prénom et du nom
             Regex regexNomPrenom = new Regex(@"^[A-Za-z\s]+$");
@@ -231,7 +224,7 @@ namespace Mediateq_AP_SIO2
             }
 
 
-            if (string.IsNullOrEmpty(Aj_id.Text) || string.IsNullOrEmpty(Aj_nom.Text) || string.IsNullOrEmpty(Aj_prenom.Text) || string.IsNullOrEmpty(Aj_adresse.Text) || string.IsNullOrEmpty(Aj_tel.Text) || string.IsNullOrEmpty(Aj_adresse_mail.Text))
+            if (string.IsNullOrEmpty(Aj_nom.Text) || string.IsNullOrEmpty(Aj_prenom.Text) || string.IsNullOrEmpty(Aj_adresse.Text) || string.IsNullOrEmpty(Aj_tel.Text) || string.IsNullOrEmpty(Aj_adresse_mail.Text))
             {
                 Ajouter.Enabled = false;
                 return;
@@ -242,8 +235,7 @@ namespace Mediateq_AP_SIO2
             DateTime dtpannee = dtp_annee.Value;
             DateTime dtpPremierAbo = dtp_premier_abo.Value;
             DateTime dtpFinAbo = dtpPremierAbo.AddMonths(2);
-            Abonne abo = new Abonne(int.Parse(Aj_id.Text), Aj_nom.Text, Aj_prenom.Text, Aj_adresse.Text, int.Parse(Aj_tel.Text), Aj_adresse_mail.Text, dtpannee, dtpPremierAbo, dtpFinAbo);
-            DAODocuments.ajouterAbo(abo);
+            DAODocuments.ajouterAbo(Aj_nom.Text, Aj_prenom.Text, Aj_adresse.Text, int.Parse(Aj_tel.Text), Aj_adresse_mail.Text, dtpannee, dtpPremierAbo, dtpFinAbo);
             MessageBox.Show("Abonné ajouté");
         }
 
@@ -311,9 +303,6 @@ namespace Mediateq_AP_SIO2
                 MessageBox.Show("Numéro de téléphone invalide. Veuillez entrer un numéro de téléphone français valide au format XX XX XX XX XX.");
                 return;
             }
-
-
-            // Le reste du code pour la modification de l'abonné...
 
             Abonne abonneModif = new Abonne(idModif, nomModif, prenomModif, adresseModif, telModif, adresseMailModif, dateNaissanceModif, datePremierAboModif, dateFinAboModif);
             MessageBox.Show("Abonné modifié");
@@ -665,9 +654,31 @@ namespace Mediateq_AP_SIO2
             int DureeDvdModif = Int32.Parse(txtBoxModifDvdDuree.Text);
             Categorie CategorieModifDvd = (Categorie)cbx_ModifCategDvd.SelectedItem;
 
+            Regex regexSynopsisDVD = new Regex(@"^.+$");
+            if (!regexSynopsisDVD.IsMatch(SynopsisDvdModif))
+            {
+                MessageBox.Show("Synopsis du DVD invalide. Veuillez entrer un synopsis valide.");
+                return;
+            }
+
+            Regex regexTitreDVD = new Regex(@"^[A-Za-z\s]+$");
+            if (!regexTitreDVD.IsMatch(TitreDvdModif))
+            {
+                MessageBox.Show("Titre du DVD invalide. Veuillez entrer un titre valide contenant uniquement des lettres et des espaces.");
+                return;
+            }
+
+            Regex regexRealisateurDVD = new Regex(@"^[A-Za-z\s]+$");
+            if (!regexRealisateurDVD.IsMatch(RealisateurDvdModif))
+            {
+                MessageBox.Show("Réalisateur du DVD invalide. Veuillez entrer un réalisateur valide contenant uniquement des lettres et des espaces.");
+                return;
+            }
+
             DVD dvd = new DVD(idDvdModif, TitreDvdModif, ImageDvdeModif, SynopsisDvdModif, DureeDvdModif, RealisateurDvdModif, CategorieModifDvd);
 
             DAODocuments.modifDVD(dvd);
+            MessageBox.Show("dvd modifié");
         }
 
         private void btnSuppDvd_Enter(object sender, EventArgs e)
@@ -683,6 +694,7 @@ namespace Mediateq_AP_SIO2
             DVD dvd = new DVD(idDvdModif, TitreDvdModif, ImageDvdeModif, SynopsisDvdModif, DureeDvdModif, RealisateurDvdModif, CategorieModifDvd);
 
             DAODocuments.suppDVD(dvd);
+            MessageBox.Show("dvd supprimé");
         }
 
         private void button1_Click(object sender, EventArgs e)

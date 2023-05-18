@@ -160,6 +160,7 @@ namespace Mediateq_AP_SIO2
             this.txtBox_numero = new System.Windows.Forms.TextBox();
             this.cb_document = new System.Windows.Forms.ComboBox();
             this.CRUDLivreDvd = new System.Windows.Forms.TabPage();
+            this.btnRefreshLivre = new System.Windows.Forms.Button();
             this.dgvLivre = new System.Windows.Forms.DataGridView();
             this.ID_Livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Auteur_Livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -169,6 +170,12 @@ namespace Mediateq_AP_SIO2
             this.Image_Livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Categorie_Livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBoxLivre2 = new System.Windows.Forms.GroupBox();
+            this.txtBoxModifLivreCollection = new System.Windows.Forms.TextBox();
+            this.txtBoxModifLivreImage = new System.Windows.Forms.TextBox();
+            this.txtBoxModifLivreISBN = new System.Windows.Forms.TextBox();
+            this.txtBoxModifLivreTitre = new System.Windows.Forms.TextBox();
+            this.txtBoxModifLivreAuteur = new System.Windows.Forms.TextBox();
+            this.txtBoxModifLivreId = new System.Windows.Forms.TextBox();
             this.label53 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
             this.label51 = new System.Windows.Forms.Label();
@@ -234,13 +241,6 @@ namespace Mediateq_AP_SIO2
             this.txtDvd_id = new System.Windows.Forms.TextBox();
             this.cbx_categDVD = new System.Windows.Forms.ComboBox();
             this.customInstaller1 = new MySql.Data.MySqlClient.CustomInstaller();
-            this.txtBoxModifLivreId = new System.Windows.Forms.TextBox();
-            this.txtBoxModifLivreAuteur = new System.Windows.Forms.TextBox();
-            this.txtBoxModifLivreTitre = new System.Windows.Forms.TextBox();
-            this.txtBoxModifLivreISBN = new System.Windows.Forms.TextBox();
-            this.txtBoxModifLivreImage = new System.Windows.Forms.TextBox();
-            this.txtBoxModifLivreCollection = new System.Windows.Forms.TextBox();
-            this.btnRefreshLivre = new System.Windows.Forms.Button();
             this.Connexion.SuspendLayout();
             this.tabParutions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParutions)).BeginInit();
@@ -1448,6 +1448,16 @@ namespace Mediateq_AP_SIO2
             this.CRUDLivreDvd.UseVisualStyleBackColor = true;
             this.CRUDLivreDvd.Enter += new System.EventHandler(this.CRUDLivreDvd_Enter);
             // 
+            // btnRefreshLivre
+            // 
+            this.btnRefreshLivre.Location = new System.Drawing.Point(919, 449);
+            this.btnRefreshLivre.Name = "btnRefreshLivre";
+            this.btnRefreshLivre.Size = new System.Drawing.Size(89, 32);
+            this.btnRefreshLivre.TabIndex = 13;
+            this.btnRefreshLivre.Text = "Refresh";
+            this.btnRefreshLivre.UseVisualStyleBackColor = true;
+            this.btnRefreshLivre.Click += new System.EventHandler(this.btnRefreshLivre_Click);
+            // 
             // dgvLivre
             // 
             this.dgvLivre.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -1525,6 +1535,49 @@ namespace Mediateq_AP_SIO2
             this.groupBoxLivre2.TabIndex = 11;
             this.groupBoxLivre2.TabStop = false;
             this.groupBoxLivre2.Text = "Livres modif";
+            // 
+            // txtBoxModifLivreCollection
+            // 
+            this.txtBoxModifLivreCollection.Location = new System.Drawing.Point(169, 193);
+            this.txtBoxModifLivreCollection.Name = "txtBoxModifLivreCollection";
+            this.txtBoxModifLivreCollection.Size = new System.Drawing.Size(100, 20);
+            this.txtBoxModifLivreCollection.TabIndex = 14;
+            // 
+            // txtBoxModifLivreImage
+            // 
+            this.txtBoxModifLivreImage.Location = new System.Drawing.Point(169, 219);
+            this.txtBoxModifLivreImage.Name = "txtBoxModifLivreImage";
+            this.txtBoxModifLivreImage.Size = new System.Drawing.Size(100, 20);
+            this.txtBoxModifLivreImage.TabIndex = 14;
+            // 
+            // txtBoxModifLivreISBN
+            // 
+            this.txtBoxModifLivreISBN.Location = new System.Drawing.Point(169, 135);
+            this.txtBoxModifLivreISBN.Name = "txtBoxModifLivreISBN";
+            this.txtBoxModifLivreISBN.Size = new System.Drawing.Size(100, 20);
+            this.txtBoxModifLivreISBN.TabIndex = 14;
+            // 
+            // txtBoxModifLivreTitre
+            // 
+            this.txtBoxModifLivreTitre.Location = new System.Drawing.Point(169, 110);
+            this.txtBoxModifLivreTitre.Name = "txtBoxModifLivreTitre";
+            this.txtBoxModifLivreTitre.Size = new System.Drawing.Size(100, 20);
+            this.txtBoxModifLivreTitre.TabIndex = 14;
+            // 
+            // txtBoxModifLivreAuteur
+            // 
+            this.txtBoxModifLivreAuteur.Location = new System.Drawing.Point(169, 162);
+            this.txtBoxModifLivreAuteur.Name = "txtBoxModifLivreAuteur";
+            this.txtBoxModifLivreAuteur.Size = new System.Drawing.Size(100, 20);
+            this.txtBoxModifLivreAuteur.TabIndex = 20;
+            // 
+            // txtBoxModifLivreId
+            // 
+            this.txtBoxModifLivreId.Location = new System.Drawing.Point(169, 81);
+            this.txtBoxModifLivreId.Name = "txtBoxModifLivreId";
+            this.txtBoxModifLivreId.ReadOnly = true;
+            this.txtBoxModifLivreId.Size = new System.Drawing.Size(100, 20);
+            this.txtBoxModifLivreId.TabIndex = 13;
             // 
             // label53
             // 
@@ -1934,6 +1987,7 @@ namespace Mediateq_AP_SIO2
             // 
             this.txtBoxModifDvdId.Location = new System.Drawing.Point(147, 79);
             this.txtBoxModifDvdId.Name = "txtBoxModifDvdId";
+            this.txtBoxModifDvdId.ReadOnly = true;
             this.txtBoxModifDvdId.Size = new System.Drawing.Size(121, 20);
             this.txtBoxModifDvdId.TabIndex = 4;
             // 
@@ -2118,58 +2172,6 @@ namespace Mediateq_AP_SIO2
             this.cbx_categDVD.Name = "cbx_categDVD";
             this.cbx_categDVD.Size = new System.Drawing.Size(121, 21);
             this.cbx_categDVD.TabIndex = 1;
-            // 
-            // txtBoxModifLivreId
-            // 
-            this.txtBoxModifLivreId.Location = new System.Drawing.Point(169, 81);
-            this.txtBoxModifLivreId.Name = "txtBoxModifLivreId";
-            this.txtBoxModifLivreId.Size = new System.Drawing.Size(100, 20);
-            this.txtBoxModifLivreId.TabIndex = 13;
-            // 
-            // txtBoxModifLivreAuteur
-            // 
-            this.txtBoxModifLivreAuteur.Location = new System.Drawing.Point(169, 162);
-            this.txtBoxModifLivreAuteur.Name = "txtBoxModifLivreAuteur";
-            this.txtBoxModifLivreAuteur.Size = new System.Drawing.Size(100, 20);
-            this.txtBoxModifLivreAuteur.TabIndex = 20;
-            // 
-            // txtBoxModifLivreTitre
-            // 
-            this.txtBoxModifLivreTitre.Location = new System.Drawing.Point(169, 110);
-            this.txtBoxModifLivreTitre.Name = "txtBoxModifLivreTitre";
-            this.txtBoxModifLivreTitre.Size = new System.Drawing.Size(100, 20);
-            this.txtBoxModifLivreTitre.TabIndex = 14;
-            // 
-            // txtBoxModifLivreISBN
-            // 
-            this.txtBoxModifLivreISBN.Location = new System.Drawing.Point(169, 135);
-            this.txtBoxModifLivreISBN.Name = "txtBoxModifLivreISBN";
-            this.txtBoxModifLivreISBN.Size = new System.Drawing.Size(100, 20);
-            this.txtBoxModifLivreISBN.TabIndex = 14;
-            // 
-            // txtBoxModifLivreImage
-            // 
-            this.txtBoxModifLivreImage.Location = new System.Drawing.Point(169, 219);
-            this.txtBoxModifLivreImage.Name = "txtBoxModifLivreImage";
-            this.txtBoxModifLivreImage.Size = new System.Drawing.Size(100, 20);
-            this.txtBoxModifLivreImage.TabIndex = 14;
-            // 
-            // txtBoxModifLivreCollection
-            // 
-            this.txtBoxModifLivreCollection.Location = new System.Drawing.Point(169, 193);
-            this.txtBoxModifLivreCollection.Name = "txtBoxModifLivreCollection";
-            this.txtBoxModifLivreCollection.Size = new System.Drawing.Size(100, 20);
-            this.txtBoxModifLivreCollection.TabIndex = 14;
-            // 
-            // btnRefreshLivre
-            // 
-            this.btnRefreshLivre.Location = new System.Drawing.Point(919, 449);
-            this.btnRefreshLivre.Name = "btnRefreshLivre";
-            this.btnRefreshLivre.Size = new System.Drawing.Size(89, 32);
-            this.btnRefreshLivre.TabIndex = 13;
-            this.btnRefreshLivre.Text = "Refresh";
-            this.btnRefreshLivre.UseVisualStyleBackColor = true;
-            this.btnRefreshLivre.Click += new System.EventHandler(this.btnRefreshLivre_Click);
             // 
             // FrmMediateq
             // 

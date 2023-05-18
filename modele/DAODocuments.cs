@@ -211,14 +211,14 @@ namespace Mediateq_AP_SIO2
         }
 
         //Méthode permettant d'ajouter un abonné
-        public static void ajouterAbo(Abonne unAbonne)
+        public static void ajouterAbo(string Nom, string Prenom, string Adresse, int Tel, string Mail, DateTime dateNaissance, DateTime datePremierAbo, DateTime dateFinAbo)
         {
             try
             {
-                string date = unAbonne.Date_naiss.ToString("yyyy-MM-d");
-                string date1 = unAbonne.Date_premier_abo.ToString("yyyy-MM-d");
-                string date2 = unAbonne.Date_fin_abo.ToString("yyyy-MM-d");
-                String query = "INSERT INTO abonnement (id, nom, prenom, adresse, tel, adresse_mail, date_naissance, date_premier_abonnement, date_fin_abo)" + "VALUES('" + int.Parse(unAbonne.Id.ToString()) + "','" + unAbonne.Nom.ToString() + "','" + unAbonne.Prenom.ToString() + "','" + unAbonne.Adresse.ToString() + "','" + int.Parse(unAbonne.Tel.ToString()) + "','" + unAbonne.Adresse_mail.ToString() + "','" + date + "','" + date1 + "','" + date2 + "')";
+                string date = dateNaissance.ToString("yyyy-MM-d");
+                string date1 = datePremierAbo.ToString("yyyy-MM-d");
+                string date2 = dateFinAbo.ToString("yyyy-MM-d");
+                String query = "INSERT INTO abonnement (nom, prenom, adresse, tel, adresse_mail, date_naissance, date_premier_abonnement, date_fin_abo) values " +"('"+ Nom + "','" + Prenom + "', '" + Adresse + "', '" + Tel + "' , '" + Mail + "','" + date + "','" + date1 + "','" + date2 + "')";
                 DAOFactory.connecter();
                 DAOFactory.execSQLWrite(query);
                 DAOFactory.deconnecter();
