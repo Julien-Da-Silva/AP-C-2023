@@ -26,6 +26,8 @@ namespace Mediateq_AP_SIO2
         static List<Rayon> lesRayons;
         static List<DVD> lesDVD;
 
+        public Users user { get; set; }
+
         //static List<DVD> lesDVD;
 
         #endregion
@@ -184,6 +186,7 @@ namespace Mediateq_AP_SIO2
         }
 
         #endregion
+
 
 
 
@@ -563,6 +566,11 @@ namespace Mediateq_AP_SIO2
             cbx_ModifDvd.DisplayMember = "titre";
             cbx_ModifCategDvd.DataSource= lesCategories;
             cbx_ModifCategDvd.DisplayMember = "libelle";
+
+            foreach (DVD dvd in lesDVD)
+            {
+                dgvDvd.Rows.Add(dvd.IdDoc, dvd.Titre, dvd.Image, dvd.Synopsis, dvd.Realisateur, dvd.Duree, dvd.LaCategorie.Libelle);
+            }
         }
 
         private void btnAjout_DVD_Enter(object sender, EventArgs e)
@@ -675,7 +683,7 @@ namespace Mediateq_AP_SIO2
                 return;
             }
 
-            DVD dvd = new DVD(idDvdModif, TitreDvdModif, ImageDvdeModif, SynopsisDvdModif, DureeDvdModif, RealisateurDvdModif, CategorieModifDvd);
+            DVD dvd = new DVD(idDvdModif, TitreDvdModif, SynopsisDvdModif, RealisateurDvdModif, DureeDvdModif, ImageDvdeModif, CategorieModifDvd);
 
             DAODocuments.modifDVD(dvd);
             MessageBox.Show("dvd modifié");
@@ -744,6 +752,85 @@ namespace Mediateq_AP_SIO2
                 dgvLivre.Rows.Add(livre.IdDoc, livre.Auteur, livre.Titre, livre.ISBN1, livre.LaCollection, livre.Image, livre.LaCategorie);
             }
             dgvLivre.Refresh();
+        }
+
+        private void btnRefreshDvd_Click(object sender, EventArgs e)
+        {
+            dgvDvd.Rows.Clear();
+
+            //Rafraîchissement de la collection
+            lesDVD = DAODocuments.getAllDVD();
+            foreach (DVD dvd in lesDVD)
+            {
+                dgvDvd.Rows.Add(dvd.IdDoc, dvd.Titre, dvd.Image, dvd.Synopsis, dvd.Realisateur, dvd.Duree, dvd.LaCategorie.Libelle);
+            }
+            dgvDvd.Refresh();
+        }
+
+        private void txtBoxRechercherTitreDvd_TextChanged(object sender, EventArgs e)
+        {
+            dgvRechercherTitreDvd.Rows.Clear();
+
+            // On parcourt tous les livres. Si le titre matche avec la saisie, on l'affiche dans le datagrid.
+            foreach (DVD dvd in lesDVD)
+            {
+                // on passe le champ de saisie et le titre en minuscules car la méthode Contains
+                // tient compte de la casse.
+                string saisieMinuscules;
+                saisieMinuscules = txtBoxRechercherTitreDvd.Text.ToLower();
+                string titreMinuscules;
+                titreMinuscules = dvd.Titre.ToLower();
+
+                //on teste si le titre du livre contient ce qui a été saisi
+                if (titreMinuscules.Contains(saisieMinuscules))
+                {
+                    dgvRechercherTitreDvd.Rows.Add(dvd.Titre, dvd.Synopsis, dvd.Realisateur, dvd.Duree);
+                }
+            }
+        }
+
+        private void txtBoxRechercherLivreTitre_TextChanged(object sender, EventArgs e)
+        {
+            dgvRechercherLivreTitre.Rows.Clear();
+
+            // On parcourt tous les livres. Si le titre matche avec la saisie, on l'affiche dans le datagrid.
+            foreach (Livre livre in lesLivres)
+            {
+                // on passe le champ de saisie et le titre en minuscules car la méthode Contains
+                // tient compte de la casse.
+                string saisieMinuscules;
+                saisieMinuscules = txtBoxRechercherLivreTitre.Text.ToLower();
+                string titreMinuscules;
+                titreMinuscules = livre.Titre.ToLower();
+
+                //on teste si le titre du livre contient ce qui a été saisi
+                if (titreMinuscules.Contains(saisieMinuscules))
+                {
+                    dgvRechercherLivreTitre.Rows.Add(livre.Titre, livre.Auteur, livre.ISBN1, livre.LaCollection, livre.LaCategorie.Libelle);
+                }
+            }
+        }
+
+        private void txtBoxRechercherAbo_TextChanged(object sender, EventArgs e)
+        {
+            dgvRechercherAbo.Rows.Clear();
+
+            // On parcourt tous les livres. Si le titre matche avec la saisie, on l'affiche dans le datagrid.
+            foreach (Abonne Abo in lesAbonnes)
+            {
+                // on passe le champ de saisie et le titre en minuscules car la méthode Contains
+                // tient compte de la casse.
+                string saisieMinuscules;
+                saisieMinuscules = txtBoxRechercherAbo.Text.ToLower();
+                string titreMinuscules;
+                titreMinuscules = Abo.Nom.ToLower();
+
+                //on teste si le titre du livre contient ce qui a été saisi
+                if (titreMinuscules.Contains(saisieMinuscules))
+                {
+                    dgvRechercherAbo.Rows.Add(Abo.Id, Abo.Nom, Abo.Prenom, Abo.Adresse, Abo.Tel);
+                }
+            }
         }
 
 

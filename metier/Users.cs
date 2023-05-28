@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mediateq_AP_SIO2.metier
 {
-    class Users
+        public class Users
     {
         private int id;
         private string username;
