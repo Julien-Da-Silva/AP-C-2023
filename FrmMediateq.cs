@@ -25,8 +25,10 @@ namespace Mediateq_AP_SIO2
         static List<Document> lesDocuments;
         static List<Rayon> lesRayons;
         static List<DVD> lesDVD;
+        static List<Users> lesUsers;
 
-        public Users user { get; set; }
+        public Users u { get; set; }
+
 
         //static List<DVD> lesDVD;
 
@@ -35,9 +37,10 @@ namespace Mediateq_AP_SIO2
 
         #region Procédures évènementielles
 
-        public FrmMediateq()
+        public FrmMediateq(Users utilisateur)
         {
             InitializeComponent();
+            u = utilisateur;
         }
 
         private void FrmMediateq_Load(object sender, EventArgs e)
@@ -53,6 +56,20 @@ namespace Mediateq_AP_SIO2
             lesRayons = DAODocuments.getAllRayons();
             lesCategories = DAODocuments.getAllCategories();
             lesDVD = DAODocuments.getAllDVD();
+
+            if (u.Role == "pret")
+            {
+                Connexion.TabPages.Remove(CRUD_abo);
+                Connexion.TabPages.Remove(dgvAbo);
+                Connexion.TabPages.Remove(exemplaire);
+            }
+
+            if (u.Role == "culture")
+            {
+                Connexion.TabPages.Remove(CRUD_abo);
+                Connexion.TabPages.Remove(CRUDLivreDvd);
+                Connexion.TabPages.Remove(CRUD_DVD);
+            }
 
         }
 
@@ -218,6 +235,14 @@ namespace Mediateq_AP_SIO2
                 return;
             }
 
+            Regex regexTelephone = new Regex(@"^\d{10}$");
+            if (!regexTelephone.IsMatch(Aj_tel.Text))
+            {
+                MessageBox.Show("numéro de téléphone invalide. Utilisez le format XXXXXXXXXX.");
+                return;
+
+            }
+
             // Validation de l'adresse e-mail
             Regex regexEmail = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
             if (!regexEmail.IsMatch(Aj_adresse_mail.Text))
@@ -300,10 +325,10 @@ namespace Mediateq_AP_SIO2
                 return;
             }
 
-            Regex regexTelephone = new Regex(@"^0[1-9](?:\d{2}){4}$");
+            Regex regexTelephone = new Regex(@"^[0-9]{10}$");
             if (!regexTelephone.IsMatch(txt_modif_tel.Text))
             {
-                MessageBox.Show("Numéro de téléphone invalide. Veuillez entrer un numéro de téléphone français valide au format XX XX XX XX XX.");
+                MessageBox.Show("Numéro de téléphone invalide. Utilisez le format XXXXXXXXXX.");
                 return;
             }
 
@@ -662,6 +687,7 @@ namespace Mediateq_AP_SIO2
             int DureeDvdModif = Int32.Parse(txtBoxModifDvdDuree.Text);
             Categorie CategorieModifDvd = (Categorie)cbx_ModifCategDvd.SelectedItem;
 
+
             Regex regexSynopsisDVD = new Regex(@"^.+$");
             if (!regexSynopsisDVD.IsMatch(SynopsisDvdModif))
             {
@@ -784,7 +810,7 @@ namespace Mediateq_AP_SIO2
                 //on teste si le titre du livre contient ce qui a été saisi
                 if (titreMinuscules.Contains(saisieMinuscules))
                 {
-                    dgvRechercherTitreDvd.Rows.Add(dvd.Titre, dvd.Synopsis, dvd.Realisateur, dvd.Duree);
+                    dgvRechercherTitreDvd.Rows.Add(dvd.IdDoc, dvd.Titre, dvd.Synopsis, dvd.Realisateur, dvd.Duree, dvd.Image, dvd.LaCategorie.Libelle);
                 }
             }
         }
@@ -806,7 +832,7 @@ namespace Mediateq_AP_SIO2
                 //on teste si le titre du livre contient ce qui a été saisi
                 if (titreMinuscules.Contains(saisieMinuscules))
                 {
-                    dgvRechercherLivreTitre.Rows.Add(livre.Titre, livre.Auteur, livre.ISBN1, livre.LaCollection, livre.LaCategorie.Libelle);
+                    dgvRechercherLivreTitre.Rows.Add(livre.IdDoc,livre.Titre, livre.ISBN1, livre.Auteur, livre.LaCollection, livre.Image,livre.LaCategorie.Libelle);
                 }
             }
         }
@@ -828,31 +854,104 @@ namespace Mediateq_AP_SIO2
                 //on teste si le titre du livre contient ce qui a été saisi
                 if (titreMinuscules.Contains(saisieMinuscules))
                 {
-                    dgvRechercherAbo.Rows.Add(Abo.Id, Abo.Nom, Abo.Prenom, Abo.Adresse, Abo.Tel);
+                    dgvRechercherAbo.Rows.Add(Abo.Id, Abo.Nom, Abo.Prenom, Abo.Adresse, Abo.Tel, Abo.Adresse_mail, Abo.Date_naiss, Abo.Date_premier_abo, Abo.Date_fin_abo);
                 }
             }
         }
 
+        private void dgvRechercherAbo_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0) // Vérifie si la cellule cliquée est valide
+            {
+                DataGridViewCell cell = dgvRechercherAbo.Rows[e.RowIndex].Cells[e.ColumnIndex]; // Récupère la cellule cliquée
 
-        /* private void Ajouter_Enter(object sender, EventArgs e)
-         {
+                if (cell.Value != DBNull.Value)
+                {
+                    // Remplir les TextBox avec les valeurs de la cellule cliquée
+                    modif_id.Text = dgvRechercherAbo.Rows[e.RowIndex].Cells["rech_abo_id"].Value.ToString();
+                    modif_nom.Text = dgvRechercherAbo.Rows[e.RowIndex].Cells["rech_abo_nom"].Value.ToString();
+                    modif_prenom.Text = dgvRechercherAbo.Rows[e.RowIndex].Cells["rech_abo_prenom"].Value.ToString();
+                    modif_adresse.Text = dgvRechercherAbo.Rows[e.RowIndex].Cells["rech_abo_adresse"].Value.ToString();
+                    txt_modif_tel.Text = dgvRechercherAbo.Rows[e.RowIndex].Cells["rech_abo_tel"].Value.ToString();
+                    modif_adresse_mail.Text = dgvRechercherAbo.Rows[e.RowIndex].Cells["rech_abo_adresse_mail"].Value.ToString();
+                    dtp_modif_annee.Value = Convert.ToDateTime(dgvRechercherAbo.Rows[e.RowIndex].Cells["rech_abo_date_naissance"].Value);
+                    dtp_premier_abo.Value = Convert.ToDateTime(dgvRechercherAbo.Rows[e.RowIndex].Cells["rech_abo_date_premier_abo"].Value);
+                    dtp_date_fin_abo.Value = Convert.ToDateTime(dgvRechercherAbo.Rows[e.RowIndex].Cells["rech_abo_date_fin_abo"].Value);
+                }
+            }
+        }
 
-         }*/
+        private void dgvRechercherLivreTitre_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0) // Vérifie si la cellule cliquée est valide
+            {
+                DataGridViewCell cell = dgvRechercherLivreTitre.Rows[e.RowIndex].Cells[e.ColumnIndex]; // Récupère la cellule cliquée
 
-        /* private void gpxCRUD_DVD2_Enter(object sender, EventArgs e)
-         {
+                if (cell.Value != DBNull.Value)
+                {
+                    txtBoxModifLivreId.Text = dgvRechercherLivreTitre.Rows[e.RowIndex].Cells["rech_id_livre"].Value.ToString();
+                    txtBoxModifLivreTitre.Text = dgvRechercherLivreTitre.Rows[e.RowIndex].Cells["rech_titre_livre"].Value.ToString();
+                    txtBoxModifLivreISBN.Text = dgvRechercherLivreTitre.Rows[e.RowIndex].Cells["rech_isbn_livre"].Value.ToString();
+                    txtBoxModifLivreAuteur.Text = dgvRechercherLivreTitre.Rows[e.RowIndex].Cells["rech_auteur_livre"].Value.ToString();
+                    txtBoxModifLivreCollection.Text = dgvRechercherLivreTitre.Rows[e.RowIndex].Cells["rech_collection_livre"].Value.ToString();
+                    txtBoxModifLivreImage.Text = dgvRechercherLivreTitre.Rows[e.RowIndex].Cells["rech_image_livre"].Value.ToString();
 
-         }*/
+                    string categorieLibelle = dgvRechercherLivreTitre.Rows[e.RowIndex].Cells["rech_categorie_livre"].Value.ToString();
+                    Categorie categorie = lesCategories.Find(c => c.Libelle == categorieLibelle);
+                    if (categorie != null)
+                    {
+                        cbxModifCateg.SelectedItem = categorie;
+                    }
 
+                    //récupération du titre en parcourant la combo box, on recupére la valeur lorsqu'elle est égale à la ligne du datagridview
 
-        //private void cbModifLivre_Enter(object sender, EventArgs e)
-        // {
+                    string titreLivre = dgvRechercherLivreTitre.Rows[e.RowIndex].Cells["rech_titre_livre"].Value.ToString();
+                    foreach (Livre livre in cbModifLivre.Items)
+                    {
+                        if (livre.Titre == titreLivre)
+                        {
+                            cbModifLivre.SelectedItem = livre;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
-        // }
+        private void dgvRechercherTitreDvd_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
 
-        //private void exemplaire_Click(object sender, EventArgs e)
-        //{
+                 if (e.RowIndex >= 0 && e.ColumnIndex >= 0) // Vérifie si la cellule cliquée est valide
+            {
+                DataGridViewCell cell = dgvRechercherTitreDvd.Rows[e.RowIndex].Cells[e.ColumnIndex]; // Récupère la cellule cliquée
 
-        //}
+                if (cell.Value != DBNull.Value)
+                {
+                    txtBoxModifDvdId.Text = dgvRechercherTitreDvd.Rows[e.RowIndex].Cells["rech_id"].Value.ToString();
+                    txtBoxModifDvdTitre.Text = dgvRechercherTitreDvd.Rows[e.RowIndex].Cells["rech_titre"].Value.ToString();
+                    txtBoxModifDvdSynopsis.Text = dgvRechercherTitreDvd.Rows[e.RowIndex].Cells["rech_synopsis"].Value.ToString();
+                    txtBoxModifDvdRealisateur.Text = dgvRechercherTitreDvd.Rows[e.RowIndex].Cells["rech_realisateur"].Value.ToString();
+                    txtBoxModifDvdDuree.Text = dgvRechercherTitreDvd.Rows[e.RowIndex].Cells["rech_duree"].Value.ToString();
+                    txtBoxModifDvdImage.Text = dgvRechercherTitreDvd.Rows[e.RowIndex].Cells["rech_image"].Value.ToString();
+
+                    string categorieLibelle = dgvRechercherTitreDvd.Rows[e.RowIndex].Cells["rech_categorie"].Value.ToString();
+                    Categorie categorie = lesCategories.Find(c => c.Libelle == categorieLibelle);
+                    if (categorie != null)
+                    {
+                        cbx_ModifCategDvd.SelectedItem = categorie;
+                    }
+
+                    string titreDVD = dgvRechercherTitreDvd.Rows[e.RowIndex].Cells["rech_titre"].Value.ToString();
+                    foreach (DVD dvd in cbx_ModifDvd.Items)
+                    {
+                        if (dvd.Titre == titreDVD)
+                        {
+                            cbx_ModifDvd.SelectedItem = dvd;
+                            break;
+                        }
+                    }
+                }
+            }
+                }
     }
 }

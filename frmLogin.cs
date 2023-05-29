@@ -26,7 +26,7 @@ namespace Mediateq_AP_SIO2
             string passwordHash = txtPassword.Text;
             if (u.Password==passwordHash)
             {
-                new FrmMediateq().Show();
+                new FrmMediateq(u).Show();
             } else
             {
                 MessageBox.Show("Nom d'utilisateur ou mot de passe invalide" , "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -160,33 +160,12 @@ namespace Mediateq_AP_SIO2
 
             while (reader.Read())
             {
-                Users users = new Users(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString());
+                Users users = new Users(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString());
                 lesUsers.Add(users);
             }
             DAOFactory.deconnecter();
             return lesUsers;
         }
-
-        // public static void setDescripteurs(List<Livre> lesLivres)
-        //{
-        // DAOFactory.connecter();
-
-        //foreach (Livre livre in lesLivres)
-        //{
-        // List<Descripteur> lesDescripteursDuLivre = new List<Descripteur>(); ;
-        // string req = "Select de.id, de.libelle from descripteur de ";
-        // req += " join est_decrit_par e on de.id = e.idDesc";
-        //req += " join document do on do.id = '" + livre.IdDoc + "'";
-
-        // MySqlDataReader reader = DAOFactory.execSQLRead(req);
-        //while (reader.Read())
-        // {
-        //  lesDescripteursDuLivre.Add(new Descripteur(reader[0].ToString(), reader[1].ToString()));
-        // }
-        // livre.LesDescripteurs = lesDescripteursDuLivre;
-        //}
-        //DAOFactory.deconnecter();
-        //}
 
         public static Categorie getCategorieByLivre(Livre pLivre)
         {
@@ -390,7 +369,7 @@ namespace Mediateq_AP_SIO2
 
                 while (reader.Read())
                 {
-                    user = new Users(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString());
+                    user = new Users(int.Parse(reader[0].ToString()), reader[1].ToString(), reader[2].ToString(), reader[3].ToString());
                 }
                 DAOFactory.deconnecter();
                 return user;

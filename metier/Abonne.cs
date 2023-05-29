@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Mediateq_AP_SIO2.metier
 {
-     class Abonne
+    /// <summary>
+    /// Représente un abonné.
+    /// </summary>
+    class Abonne
     {
         private int id;
         private string nom;
@@ -18,6 +21,18 @@ namespace Mediateq_AP_SIO2.metier
         private DateTime date_premier_abonnement;
         private DateTime date_fin_abo;
 
+        /// <summary>
+        /// Initialise une nouvelle instance de la classe Abonne avec les valeurs spécifiées.
+        /// </summary>
+        /// <param name="id">L'identifiant de l'abonné.</param>
+        /// <param name="nom">Le nom de l'abonné.</param>
+        /// <param name="prenom">Le prénom de l'abonné.</param>
+        /// <param name="adresse">L'adresse de l'abonné.</param>
+        /// <param name="tel">Le numéro de téléphone de l'abonné.</param>
+        /// <param name="adresse_mail">L'adresse e-mail de l'abonné.</param>
+        /// <param name="date_naissance">La date de naissance de l'abonné.</param>
+        /// <param name="date_premier_abonnement">La date du premier abonnement de l'abonné.</param>
+        /// <param name="date_fin_abo">La date de fin de l'abonnement de l'abonné.</param>
         public Abonne(int id, string nom, string prenom, string adresse, int tel, string adresse_mail, DateTime date_naissance, DateTime date_premier_abonnement, DateTime date_fin_abo)
         {
             this.id = id;
@@ -31,21 +46,50 @@ namespace Mediateq_AP_SIO2.metier
             this.date_fin_abo = date_fin_abo;
         }
 
+        /// <summary>
+        /// Obtient ou définit l'identifiant de l'abonné.
+        /// </summary>
         public int Id { get => id; set => id = value; }
+
+        /// <summary>
+        /// Obtient ou définit le nom de l'abonné.
+        /// </summary>
         public string Nom { get => nom; set => nom = value; }
 
+        /// <summary>
+        /// Obtient ou définit le prénom de l'abonné.
+        /// </summary>
         public string Prenom { get => prenom; set => prenom = value; }
 
+        /// <summary>
+        /// Obtient ou définit l'adresse de l'abonné.
+        /// </summary>
         public string Adresse { get => adresse; set => adresse = value; }
 
+        /// <summary>
+        /// Obtient ou définit le numéro de téléphone de l'abonné.
+        /// </summary>
         public int Tel { get => tel; set => tel = value; }
 
+        /// <summary>
+        /// Obtient ou définit l'adresse e-mail de l'abonné.
+        /// </summary>
         public string Adresse_mail { get => adresse_mail; set => adresse_mail = value; }
 
+        ///
+        /// <summary>
+        /// Obtient ou définit la date de naissance de l'abonné.
+        /// </summary>
         public DateTime Date_naiss { get => date_naissance; set => date_naissance = value; }
 
+        /// <summary>
+        /// Obtient ou définit la date du premier abonnement de l'abonné.
+        /// </summary>
         public DateTime Date_premier_abo { get => date_premier_abonnement; set => date_premier_abonnement = value; }
 
+        /// <summary>
+        /// Obtient ou définit la date de fin de l'abonnement de l'abonné.
+        /// </summary>
         public DateTime Date_fin_abo { get => date_fin_abo; set => date_fin_abo = value; }
     }
 }
