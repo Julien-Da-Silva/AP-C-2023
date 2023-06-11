@@ -13,7 +13,10 @@ using System.Text.RegularExpressions;
 
 namespace Mediateq_AP_SIO2
 {
-    public partial class FrmMediateq : Form
+    /// <summary>
+    /// Formulaire Mediateq ou sont réalisé les traitements
+    /// </summary>
+     partial class FrmMediateq : Form
     {
         #region Variables globales
 
@@ -287,11 +290,17 @@ namespace Mediateq_AP_SIO2
         //Bouton confirmant la suppression
         private void supprimer_Click(object sender, EventArgs e)
         {
-                Abonne abonne = (Abonne)cbSupp.SelectedItem;
+            Abonne abonne = (Abonne)cbSupp.SelectedItem;
+
+            DialogResult result = MessageBox.Show("Êtes-vous sûr de vouloir supprimer cet abonné ?", "Confirmation de suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
                 DAODocuments.supAbo(abonne);
                 MessageBox.Show("Abonné supprimé");
- 
+            }
         }
+
 
         // Bouton appelant la méthode modifierAbo permettant d'effectuer la modification de l'abonné
 
@@ -516,8 +525,13 @@ namespace Mediateq_AP_SIO2
             Categorie CategLivreModif = (Categorie)cbxModifCateg.SelectedItem;
 
             Livre livre = new Livre(IdLivreModif, TitreLivreModif, ISBNLivreModif, AuteurLivreModif, CollectionLivreModif, ImageLivreModif, CategLivreModif);
-            DAODocuments.suppLivre(livre);
-            MessageBox.Show("livre supprimé");
+            DialogResult result = MessageBox.Show("Êtes-vous sûr de vouloir supprimer ce livre ?", "Confirmation de suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                DAODocuments.suppLivre(livre);
+                MessageBox.Show("livre supprimé");
+            }
         }
 
         private void btnModifLivre_Enter(object sender, EventArgs e)
@@ -726,9 +740,13 @@ namespace Mediateq_AP_SIO2
             Categorie CategorieModifDvd = (Categorie)cbx_ModifCategDvd.SelectedItem;
 
             DVD dvd = new DVD(idDvdModif, TitreDvdModif, ImageDvdeModif, SynopsisDvdModif, DureeDvdModif, RealisateurDvdModif, CategorieModifDvd);
+            DialogResult result = MessageBox.Show("Êtes-vous sûr de vouloir supprimer ce DVD ?", "Confirmation de suppression", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            DAODocuments.suppDVD(dvd);
-            MessageBox.Show("dvd supprimé");
+            if (result == DialogResult.Yes)
+            {
+                DAODocuments.suppDVD(dvd);
+                MessageBox.Show("DVD supprimé");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -865,7 +883,7 @@ namespace Mediateq_AP_SIO2
             {
                 DataGridViewCell cell = dgvRechercherAbo.Rows[e.RowIndex].Cells[e.ColumnIndex]; // Récupère la cellule cliquée
 
-                if (cell.Value != DBNull.Value)
+                if (cell.Value != null && cell.Value != DBNull.Value && !string.IsNullOrEmpty(cell.Value.ToString()))
                 {
                     // Remplir les TextBox avec les valeurs de la cellule cliquée
                     modif_id.Text = dgvRechercherAbo.Rows[e.RowIndex].Cells["rech_abo_id"].Value.ToString();
@@ -887,7 +905,7 @@ namespace Mediateq_AP_SIO2
             {
                 DataGridViewCell cell = dgvRechercherLivreTitre.Rows[e.RowIndex].Cells[e.ColumnIndex]; // Récupère la cellule cliquée
 
-                if (cell.Value != DBNull.Value)
+                if (cell.Value != null && cell.Value != DBNull.Value && !string.IsNullOrEmpty(cell.Value.ToString()))
                 {
                     txtBoxModifLivreId.Text = dgvRechercherLivreTitre.Rows[e.RowIndex].Cells["rech_id_livre"].Value.ToString();
                     txtBoxModifLivreTitre.Text = dgvRechercherLivreTitre.Rows[e.RowIndex].Cells["rech_titre_livre"].Value.ToString();
@@ -925,7 +943,7 @@ namespace Mediateq_AP_SIO2
             {
                 DataGridViewCell cell = dgvRechercherTitreDvd.Rows[e.RowIndex].Cells[e.ColumnIndex]; // Récupère la cellule cliquée
 
-                if (cell.Value != DBNull.Value)
+                if (cell.Value != null && cell.Value != DBNull.Value && !string.IsNullOrEmpty(cell.Value.ToString()))
                 {
                     txtBoxModifDvdId.Text = dgvRechercherTitreDvd.Rows[e.RowIndex].Cells["rech_id"].Value.ToString();
                     txtBoxModifDvdTitre.Text = dgvRechercherTitreDvd.Rows[e.RowIndex].Cells["rech_titre"].Value.ToString();

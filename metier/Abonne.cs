@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace Mediateq_AP_SIO2.metier
 {
     /// <summary>
-    /// Représente un abonné.
+    /// Représente un abonné
     /// </summary>
-    class Abonne
+     class Abonne
     {
         private int id;
         private string nom;
@@ -24,15 +24,15 @@ namespace Mediateq_AP_SIO2.metier
         /// <summary>
         /// Initialise une nouvelle instance de la classe Abonne avec les valeurs spécifiées.
         /// </summary>
-        /// <param name="id">L'identifiant de l'abonné.</param>
-        /// <param name="nom">Le nom de l'abonné.</param>
-        /// <param name="prenom">Le prénom de l'abonné.</param>
-        /// <param name="adresse">L'adresse de l'abonné.</param>
-        /// <param name="tel">Le numéro de téléphone de l'abonné.</param>
-        /// <param name="adresse_mail">L'adresse e-mail de l'abonné.</param>
-        /// <param name="date_naissance">La date de naissance de l'abonné.</param>
-        /// <param name="date_premier_abonnement">La date du premier abonnement de l'abonné.</param>
-        /// <param name="date_fin_abo">La date de fin de l'abonnement de l'abonné.</param>
+        /// <param name="id"></param>
+        /// <param name="nom"></param>
+        /// <param name="prenom"></param>
+        /// <param name="adresse"></param>
+        /// <param name="tel"></param>
+        /// <param name="adresse_mail"></param>
+        /// <param name="date_naissance"></param>
+        /// <param name="date_premier_abonnement"></param>
+        /// <param name="date_fin_abo"></param>
         public Abonne(int id, string nom, string prenom, string adresse, int tel, string adresse_mail, DateTime date_naissance, DateTime date_premier_abonnement, DateTime date_fin_abo)
         {
             this.id = id;
@@ -76,7 +76,6 @@ namespace Mediateq_AP_SIO2.metier
         /// </summary>
         public string Adresse_mail { get => adresse_mail; set => adresse_mail = value; }
 
-        ///
         /// <summary>
         /// Obtient ou définit la date de naissance de l'abonné.
         /// </summary>

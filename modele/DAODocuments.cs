@@ -8,7 +8,12 @@ using System.Threading.Tasks;
 
 namespace Mediateq_AP_SIO2
 {
+    /// <summary>
+    /// Documents ou sont rangé les métohdes
+    /// </summary>
     class DAODocuments
+
+        ///méthode pour récuprérer toutes les catégories
     {
         public static List<Categorie> getAllCategories()
         {
@@ -28,6 +33,11 @@ namespace Mediateq_AP_SIO2
             return lesCategories;
         }
 
+        /// <summary>
+        /// méthode pour récuprérer tout les descripteurs
+        /// </summary>
+        /// <returns></returns>
+
         public static List<Descripteur> getAllDescripteurs()
         {
             List<Descripteur> lesDescripteurs = new List<Descripteur>();
@@ -46,7 +56,10 @@ namespace Mediateq_AP_SIO2
             return lesDescripteurs;
         }
 
-
+        /// <summary>
+        /// méthode pour récuprérer tout les abonnés
+        /// </summary>
+        /// <returns></returns>
         public static List<Abonne> getAllAbonnes()
         {
             List<Abonne> lesAbonnes = new List<Abonne>();
@@ -65,6 +78,7 @@ namespace Mediateq_AP_SIO2
             return lesAbonnes;
         }
 
+        ///méthode pour récuprérer tout les documents
         public static List<Document> getAllDocuments()
         {
             List<Document> lesDocuments = new List<Document>();
@@ -83,6 +97,10 @@ namespace Mediateq_AP_SIO2
             return lesDocuments;
         }
 
+        /// <summary>
+        /// méthode pour récuprérer tout les rayons
+        /// </summary>
+        /// <returns></returns>
         public static List<Rayon> getAllRayons()
         {
             List<Rayon> lesRayons = new List<Rayon>();
@@ -102,7 +120,7 @@ namespace Mediateq_AP_SIO2
         }
 
 
-
+        ///méthode pour récuprérer tout les livres
         public static List<Livre> getAllLivres()
         {
             List<Livre> lesLivres = new List<Livre>();
@@ -126,6 +144,10 @@ namespace Mediateq_AP_SIO2
             return lesLivres;
         }
 
+        /// <summary>
+        /// méthode pour récuprérer tout les DVD
+        /// </summary>
+        /// <returns></returns>
         public static List<DVD> getAllDVD()
         {
             List<DVD> lesDvd = new List<DVD>();
@@ -149,6 +171,7 @@ namespace Mediateq_AP_SIO2
             return lesDvd;
         }
 
+        ///méthode pour récuprérer tout les users
         public static List<Users> getAllUsers()
         {
             List<Users> lesUsers = new List<Users>();
@@ -167,6 +190,11 @@ namespace Mediateq_AP_SIO2
             return lesUsers;
         }
 
+        /// <summary>
+        /// Métohde pour récupérer la catégorie d'un livre
+        /// </summary>
+        /// <param name="pLivre"></param>
+        /// <returns></returns>
         public static Categorie getCategorieByLivre(Livre pLivre)
         {
             Categorie categorie;
@@ -189,7 +217,17 @@ namespace Mediateq_AP_SIO2
             return categorie;
         }
 
-        //Méthode permettant d'ajouter un abonné
+        /// <summary>
+        /// Méthode permettant d'ajouter un abonné
+        /// </summary>
+        /// <param name="Nom"></param>
+        /// <param name="Prenom"></param>
+        /// <param name="Adresse"></param>
+        /// <param name="Tel"></param>
+        /// <param name="Mail"></param>
+        /// <param name="dateNaissance"></param>
+        /// <param name="datePremierAbo"></param>
+        /// <param name="dateFinAbo"></param>
         public static void ajouterAbo(string Nom, string Prenom, string Adresse, int Tel, string Mail, DateTime dateNaissance, DateTime datePremierAbo, DateTime dateFinAbo)
         {
             try
@@ -209,7 +247,10 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Méthode permettant de mofifier un abonné
+        /// <summary>
+        /// Méthode permettant de mofifier un abonné
+        /// </summary>
+        /// <param name="unAbonne"></param>
         public static void modifierAbo(Abonne unAbonne)
         {
             try
@@ -229,7 +270,7 @@ namespace Mediateq_AP_SIO2
         }
 
 
-        //Méthode permettant de supprimer un abonné
+        ///Méthode permettant de supprimer un abonné
         public static void supAbo(Abonne unAbonne)
         {
             try
@@ -245,6 +286,10 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+        /// <summary>
+        /// méthode pour ajouter un exemplaire
+        /// </summary>
+        /// <param name="unExemplaire"></param>
         public static void ajouterExemplaire(Exemplaire unExemplaire)
         {
             try
@@ -260,6 +305,10 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+        /// <summary>
+        /// métohde pour ajouter un livre
+        /// </summary>
+        /// <param name="livre"></param>
         public static void ajoutLivre(Livre livre)
         {
             try
@@ -277,6 +326,11 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+
+        /// <summary>
+        /// métohde pour modifier un livre
+        /// </summary>
+        /// <param name="livre"></param>
         public static void modifLivre(Livre livre)
         {
             try
@@ -297,6 +351,10 @@ namespace Mediateq_AP_SIO2
 
         }
 
+        /// <summary>
+        /// métohde pour supprimer un livre
+        /// </summary>
+        /// <param name="livre"></param>
         public static void suppLivre(Livre livre)
         {
             string req = "DELETE FROM livre WHERE id = '" + livre.IdDoc + "'";
@@ -308,6 +366,7 @@ namespace Mediateq_AP_SIO2
             DAOFactory.deconnecter();
         }
 
+        ///métohde pour ajouter un DVD
         public static void ajoutDVD(DVD dvd)
         {
             try
@@ -325,6 +384,7 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+       ///métohde pour modifier un DVD
         public static void modifDVD(DVD dvd)
         {
             try
@@ -344,7 +404,7 @@ namespace Mediateq_AP_SIO2
 
 
         }
-
+        ///métohde pour supprimer un DVD
         public static void suppDVD(DVD dvd)
         {
             string req = "DELETE FROM dvd WHERE id = '" + dvd.IdDoc + "'";
@@ -356,6 +416,13 @@ namespace Mediateq_AP_SIO2
             DAOFactory.deconnecter();
         }
 
+        /// <summary>
+        /// Méthode pour se connecter à un utilisateur en utilisant un nom d'utilisateur
+        /// </summary>
+        /// <param name="unUsername"></param>
+        /// <returns></returns>
+        /// Prend un paramètre unUsername de type string qui représente le nom d'utilisateur
+        /// Retourne un objet Users correspondant à l'utilisateur connecté
         public static Users connex(string unUsername)
         {
 
@@ -376,6 +443,11 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+        /// <summary>
+        /// méthode pour verifier la date de fin d'abonnement de l'aboné
+        /// </summary>
+        /// <param name="unAbonne"></param>
+        /// <returns></returns>
         public static int verifAbonne(Abonne unAbonne)
         {
             try

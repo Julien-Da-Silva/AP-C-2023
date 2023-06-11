@@ -6,8 +6,15 @@ namespace Mediateq_AP_SIO2
 {
     class DAOFactory
     {
+        /// <summary>
+        /// Métohde de la BDD
+        /// </summary>
         private static MySqlConnection connexion;
 
+        /// <summary>
+        /// Crée la connection avec la BDD
+        /// </summary>
+        /// <exception cref="ExceptionSio"></exception>
         public static void creerConnection()
         {
             string serverIp = "127.0.0.1";
@@ -28,6 +35,10 @@ namespace Mediateq_AP_SIO2
 
         }
 
+        /// <summary>
+        /// Ouvre la connection à la BDD
+        /// </summary>
+        /// <exception cref="ExceptionSio"></exception>
         public static void connecter()
         {
             try
@@ -40,6 +51,9 @@ namespace Mediateq_AP_SIO2
             }
         }
 
+        /// <summary>
+        /// Déconnecte la BDD
+        /// </summary>
         public static void deconnecter()
         {
             connexion.Close();

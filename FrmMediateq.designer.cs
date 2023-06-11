@@ -31,8 +31,16 @@ namespace Mediateq_AP_SIO2
         {
             this.customInstaller1 = new MySql.Data.MySqlClient.CustomInstaller();
             this.CRUD_DVD = new System.Windows.Forms.TabPage();
+            this.label72 = new System.Windows.Forms.Label();
             this.grpBoxRechercherDvd = new System.Windows.Forms.GroupBox();
             this.dgvRechercherTitreDvd = new System.Windows.Forms.DataGridView();
+            this.rech_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rech_titre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rech_synopsis = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rech_realisateur = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rech_duree = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rech_image = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rech_categorie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label22 = new System.Windows.Forms.Label();
             this.txtBoxRechercherTitreDvd = new System.Windows.Forms.TextBox();
             this.btnRefreshDvd = new System.Windows.Forms.Button();
@@ -80,8 +88,16 @@ namespace Mediateq_AP_SIO2
             this.txtDvd_id = new System.Windows.Forms.TextBox();
             this.cbx_categDVD = new System.Windows.Forms.ComboBox();
             this.CRUDLivreDvd = new System.Windows.Forms.TabPage();
+            this.label71 = new System.Windows.Forms.Label();
             this.grpBoxRechercherLivre = new System.Windows.Forms.GroupBox();
             this.dgvRechercherLivreTitre = new System.Windows.Forms.DataGridView();
+            this.rech_id_livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rech_titre_livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rech_isbn_livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rech_auteur_livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rech_collection_livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rech_image_livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rech_categorie_livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtBoxRechercherLivreTitre = new System.Windows.Forms.TextBox();
             this.label69 = new System.Windows.Forms.Label();
             this.btnRefreshLivre = new System.Windows.Forms.Button();
@@ -152,6 +168,7 @@ namespace Mediateq_AP_SIO2
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CRUD_abo = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgvRechercherAbo = new System.Windows.Forms.DataGridView();
             this.rech_abo_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -165,7 +182,6 @@ namespace Mediateq_AP_SIO2
             this.rech_abo_date_fin_abo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtBoxRechercherAbo = new System.Windows.Forms.TextBox();
             this.label70 = new System.Windows.Forms.Label();
-            this.dtp_premier_abo = new System.Windows.Forms.DateTimePicker();
             this.dtp_annee = new System.Windows.Forms.DateTimePicker();
             this.Refresh = new System.Windows.Forms.Button();
             this.dataGridAbo = new System.Windows.Forms.DataGridView();
@@ -211,8 +227,6 @@ namespace Mediateq_AP_SIO2
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.Aj_id = new System.Windows.Forms.TextBox();
             this.Aj_adresse_mail = new System.Windows.Forms.TextBox();
             this.Aj_adresse = new System.Windows.Forms.TextBox();
             this.Aj_tel = new System.Windows.Forms.TextBox();
@@ -266,20 +280,7 @@ namespace Mediateq_AP_SIO2
             this.label1 = new System.Windows.Forms.Label();
             this.cbxTitres = new System.Windows.Forms.ComboBox();
             this.Connexion = new System.Windows.Forms.TabControl();
-            this.rech_id_livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rech_titre_livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rech_isbn_livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rech_auteur_livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rech_collection_livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rech_image_livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rech_categorie_livre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rech_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rech_titre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rech_synopsis = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rech_realisateur = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rech_duree = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rech_image = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rech_categorie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dtp_premier_abo = new System.Windows.Forms.DateTimePicker();
             this.CRUD_DVD.SuspendLayout();
             this.grpBoxRechercherDvd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRechercherTitreDvd)).BeginInit();
@@ -314,6 +315,7 @@ namespace Mediateq_AP_SIO2
             // 
             // CRUD_DVD
             // 
+            this.CRUD_DVD.Controls.Add(this.label72);
             this.CRUD_DVD.Controls.Add(this.grpBoxRechercherDvd);
             this.CRUD_DVD.Controls.Add(this.btnRefreshDvd);
             this.CRUD_DVD.Controls.Add(this.dgvDvd);
@@ -327,12 +329,23 @@ namespace Mediateq_AP_SIO2
             this.CRUD_DVD.UseVisualStyleBackColor = true;
             this.CRUD_DVD.Enter += new System.EventHandler(this.CRUD_DVD_Enter);
             // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Font = new System.Drawing.Font("Magneto", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label72.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label72.Location = new System.Drawing.Point(386, 30);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(176, 32);
+            this.label72.TabIndex = 49;
+            this.label72.Text = "CRUD DVD";
+            // 
             // grpBoxRechercherDvd
             // 
             this.grpBoxRechercherDvd.Controls.Add(this.dgvRechercherTitreDvd);
             this.grpBoxRechercherDvd.Controls.Add(this.label22);
             this.grpBoxRechercherDvd.Controls.Add(this.txtBoxRechercherTitreDvd);
-            this.grpBoxRechercherDvd.Location = new System.Drawing.Point(589, 27);
+            this.grpBoxRechercherDvd.Location = new System.Drawing.Point(591, 86);
             this.grpBoxRechercherDvd.Name = "grpBoxRechercherDvd";
             this.grpBoxRechercherDvd.Size = new System.Drawing.Size(753, 229);
             this.grpBoxRechercherDvd.TabIndex = 4;
@@ -350,11 +363,47 @@ namespace Mediateq_AP_SIO2
             this.rech_duree,
             this.rech_image,
             this.rech_categorie});
+            this.dgvRechercherTitreDvd.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvRechercherTitreDvd.Location = new System.Drawing.Point(6, 73);
             this.dgvRechercherTitreDvd.Name = "dgvRechercherTitreDvd";
             this.dgvRechercherTitreDvd.Size = new System.Drawing.Size(741, 150);
             this.dgvRechercherTitreDvd.TabIndex = 2;
             this.dgvRechercherTitreDvd.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRechercherTitreDvd_CellClick);
+            // 
+            // rech_id
+            // 
+            this.rech_id.HeaderText = "ID";
+            this.rech_id.Name = "rech_id";
+            // 
+            // rech_titre
+            // 
+            this.rech_titre.HeaderText = "Titre";
+            this.rech_titre.Name = "rech_titre";
+            // 
+            // rech_synopsis
+            // 
+            this.rech_synopsis.HeaderText = "Synopsis";
+            this.rech_synopsis.Name = "rech_synopsis";
+            // 
+            // rech_realisateur
+            // 
+            this.rech_realisateur.HeaderText = "Réalisateur";
+            this.rech_realisateur.Name = "rech_realisateur";
+            // 
+            // rech_duree
+            // 
+            this.rech_duree.HeaderText = "Durée";
+            this.rech_duree.Name = "rech_duree";
+            // 
+            // rech_image
+            // 
+            this.rech_image.HeaderText = "Image";
+            this.rech_image.Name = "rech_image";
+            // 
+            // rech_categorie
+            // 
+            this.rech_categorie.HeaderText = "Categorie";
+            this.rech_categorie.Name = "rech_categorie";
             // 
             // label22
             // 
@@ -375,7 +424,7 @@ namespace Mediateq_AP_SIO2
             // 
             // btnRefreshDvd
             // 
-            this.btnRefreshDvd.Location = new System.Drawing.Point(770, 337);
+            this.btnRefreshDvd.Location = new System.Drawing.Point(771, 427);
             this.btnRefreshDvd.Name = "btnRefreshDvd";
             this.btnRefreshDvd.Size = new System.Drawing.Size(75, 23);
             this.btnRefreshDvd.TabIndex = 3;
@@ -394,7 +443,8 @@ namespace Mediateq_AP_SIO2
             this.realisateur_dvd,
             this.duree_dvd,
             this.categorie_dvd});
-            this.dgvDvd.Location = new System.Drawing.Point(8, 337);
+            this.dgvDvd.GridColor = System.Drawing.Color.DarkKhaki;
+            this.dgvDvd.Location = new System.Drawing.Point(9, 384);
             this.dgvDvd.Name = "dgvDvd";
             this.dgvDvd.Size = new System.Drawing.Size(756, 97);
             this.dgvDvd.TabIndex = 2;
@@ -454,31 +504,35 @@ namespace Mediateq_AP_SIO2
             this.gpxCRUD_DVD2.Controls.Add(this.label61);
             this.gpxCRUD_DVD2.Controls.Add(this.cbx_ModifCategDvd);
             this.gpxCRUD_DVD2.Controls.Add(this.cbx_ModifDvd);
-            this.gpxCRUD_DVD2.Location = new System.Drawing.Point(275, 18);
+            this.gpxCRUD_DVD2.Location = new System.Drawing.Point(272, 76);
             this.gpxCRUD_DVD2.Name = "gpxCRUD_DVD2";
-            this.gpxCRUD_DVD2.Size = new System.Drawing.Size(290, 313);
+            this.gpxCRUD_DVD2.Size = new System.Drawing.Size(290, 302);
             this.gpxCRUD_DVD2.TabIndex = 1;
             this.gpxCRUD_DVD2.TabStop = false;
-            this.gpxCRUD_DVD2.Text = "groupBox3";
+            this.gpxCRUD_DVD2.Text = "modif DVD";
             // 
             // btnSuppDvd
             // 
-            this.btnSuppDvd.Location = new System.Drawing.Point(157, 264);
+            this.btnSuppDvd.BackColor = System.Drawing.Color.Red;
+            this.btnSuppDvd.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnSuppDvd.Location = new System.Drawing.Point(147, 270);
             this.btnSuppDvd.Name = "btnSuppDvd";
-            this.btnSuppDvd.Size = new System.Drawing.Size(75, 23);
+            this.btnSuppDvd.Size = new System.Drawing.Size(121, 32);
             this.btnSuppDvd.TabIndex = 17;
             this.btnSuppDvd.Text = "Supprimer";
-            this.btnSuppDvd.UseVisualStyleBackColor = true;
+            this.btnSuppDvd.UseVisualStyleBackColor = false;
             this.btnSuppDvd.Enter += new System.EventHandler(this.btnSuppDvd_Enter);
             // 
             // btnModifDvd
             // 
-            this.btnModifDvd.Location = new System.Drawing.Point(157, 235);
+            this.btnModifDvd.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnModifDvd.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnModifDvd.Location = new System.Drawing.Point(147, 235);
             this.btnModifDvd.Name = "btnModifDvd";
-            this.btnModifDvd.Size = new System.Drawing.Size(75, 23);
+            this.btnModifDvd.Size = new System.Drawing.Size(121, 29);
             this.btnModifDvd.TabIndex = 16;
             this.btnModifDvd.Text = "Modifier";
-            this.btnModifDvd.UseVisualStyleBackColor = true;
+            this.btnModifDvd.UseVisualStyleBackColor = false;
             this.btnModifDvd.Enter += new System.EventHandler(this.btnModifDvd_Enter);
             // 
             // label68
@@ -630,21 +684,23 @@ namespace Mediateq_AP_SIO2
             this.gpxCRUD_DVD.Controls.Add(this.txtDvd_Titre);
             this.gpxCRUD_DVD.Controls.Add(this.txtDvd_id);
             this.gpxCRUD_DVD.Controls.Add(this.cbx_categDVD);
-            this.gpxCRUD_DVD.Location = new System.Drawing.Point(33, 18);
+            this.gpxCRUD_DVD.Location = new System.Drawing.Point(32, 67);
             this.gpxCRUD_DVD.Name = "gpxCRUD_DVD";
-            this.gpxCRUD_DVD.Size = new System.Drawing.Size(220, 313);
+            this.gpxCRUD_DVD.Size = new System.Drawing.Size(213, 265);
             this.gpxCRUD_DVD.TabIndex = 0;
             this.gpxCRUD_DVD.TabStop = false;
             this.gpxCRUD_DVD.Text = "CRUD DVD";
             // 
             // btnAjout_DVD
             // 
+            this.btnAjout_DVD.BackColor = System.Drawing.Color.Green;
+            this.btnAjout_DVD.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnAjout_DVD.Location = new System.Drawing.Point(89, 215);
             this.btnAjout_DVD.Name = "btnAjout_DVD";
-            this.btnAjout_DVD.Size = new System.Drawing.Size(75, 23);
+            this.btnAjout_DVD.Size = new System.Drawing.Size(109, 33);
             this.btnAjout_DVD.TabIndex = 1;
             this.btnAjout_DVD.Text = "Ajouter";
-            this.btnAjout_DVD.UseVisualStyleBackColor = true;
+            this.btnAjout_DVD.UseVisualStyleBackColor = false;
             this.btnAjout_DVD.Enter += new System.EventHandler(this.btnAjout_DVD_Enter);
             // 
             // label60
@@ -762,6 +818,7 @@ namespace Mediateq_AP_SIO2
             // 
             // CRUDLivreDvd
             // 
+            this.CRUDLivreDvd.Controls.Add(this.label71);
             this.CRUDLivreDvd.Controls.Add(this.grpBoxRechercherLivre);
             this.CRUDLivreDvd.Controls.Add(this.btnRefreshLivre);
             this.CRUDLivreDvd.Controls.Add(this.dgvLivre);
@@ -775,12 +832,23 @@ namespace Mediateq_AP_SIO2
             this.CRUDLivreDvd.UseVisualStyleBackColor = true;
             this.CRUDLivreDvd.Enter += new System.EventHandler(this.CRUDLivreDvd_Enter);
             // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Font = new System.Drawing.Font("Magneto", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label71.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label71.Location = new System.Drawing.Point(398, 34);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(196, 32);
+            this.label71.TabIndex = 49;
+            this.label71.Text = "CRUD Livre";
+            // 
             // grpBoxRechercherLivre
             // 
             this.grpBoxRechercherLivre.Controls.Add(this.dgvRechercherLivreTitre);
             this.grpBoxRechercherLivre.Controls.Add(this.txtBoxRechercherLivreTitre);
             this.grpBoxRechercherLivre.Controls.Add(this.label69);
-            this.grpBoxRechercherLivre.Location = new System.Drawing.Point(697, 12);
+            this.grpBoxRechercherLivre.Location = new System.Drawing.Point(697, 95);
             this.grpBoxRechercherLivre.Name = "grpBoxRechercherLivre";
             this.grpBoxRechercherLivre.Size = new System.Drawing.Size(669, 303);
             this.grpBoxRechercherLivre.TabIndex = 14;
@@ -798,15 +866,51 @@ namespace Mediateq_AP_SIO2
             this.rech_collection_livre,
             this.rech_image_livre,
             this.rech_categorie_livre});
+            this.dgvRechercherLivreTitre.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvRechercherLivreTitre.Location = new System.Drawing.Point(6, 110);
             this.dgvRechercherLivreTitre.Name = "dgvRechercherLivreTitre";
             this.dgvRechercherLivreTitre.Size = new System.Drawing.Size(663, 170);
             this.dgvRechercherLivreTitre.TabIndex = 2;
             this.dgvRechercherLivreTitre.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRechercherLivreTitre_CellClick);
             // 
+            // rech_id_livre
+            // 
+            this.rech_id_livre.HeaderText = "ID";
+            this.rech_id_livre.Name = "rech_id_livre";
+            // 
+            // rech_titre_livre
+            // 
+            this.rech_titre_livre.HeaderText = "Titre";
+            this.rech_titre_livre.Name = "rech_titre_livre";
+            // 
+            // rech_isbn_livre
+            // 
+            this.rech_isbn_livre.HeaderText = "ISBN";
+            this.rech_isbn_livre.Name = "rech_isbn_livre";
+            // 
+            // rech_auteur_livre
+            // 
+            this.rech_auteur_livre.HeaderText = "Auteur";
+            this.rech_auteur_livre.Name = "rech_auteur_livre";
+            // 
+            // rech_collection_livre
+            // 
+            this.rech_collection_livre.HeaderText = "Collection";
+            this.rech_collection_livre.Name = "rech_collection_livre";
+            // 
+            // rech_image_livre
+            // 
+            this.rech_image_livre.HeaderText = "Image";
+            this.rech_image_livre.Name = "rech_image_livre";
+            // 
+            // rech_categorie_livre
+            // 
+            this.rech_categorie_livre.HeaderText = "Categorie";
+            this.rech_categorie_livre.Name = "rech_categorie_livre";
+            // 
             // txtBoxRechercherLivreTitre
             // 
-            this.txtBoxRechercherLivreTitre.Location = new System.Drawing.Point(146, 39);
+            this.txtBoxRechercherLivreTitre.Location = new System.Drawing.Point(143, 34);
             this.txtBoxRechercherLivreTitre.Name = "txtBoxRechercherLivreTitre";
             this.txtBoxRechercherLivreTitre.Size = new System.Drawing.Size(164, 20);
             this.txtBoxRechercherLivreTitre.TabIndex = 1;
@@ -823,7 +927,7 @@ namespace Mediateq_AP_SIO2
             // 
             // btnRefreshLivre
             // 
-            this.btnRefreshLivre.Location = new System.Drawing.Point(789, 464);
+            this.btnRefreshLivre.Location = new System.Drawing.Point(788, 540);
             this.btnRefreshLivre.Name = "btnRefreshLivre";
             this.btnRefreshLivre.Size = new System.Drawing.Size(89, 32);
             this.btnRefreshLivre.TabIndex = 13;
@@ -842,7 +946,8 @@ namespace Mediateq_AP_SIO2
             this.Collection_Livre,
             this.Image_Livre,
             this.Categorie_Livre});
-            this.dgvLivre.Location = new System.Drawing.Point(8, 353);
+            this.dgvLivre.GridColor = System.Drawing.Color.DarkKhaki;
+            this.dgvLivre.Location = new System.Drawing.Point(8, 423);
             this.dgvLivre.Name = "dgvLivre";
             this.dgvLivre.Size = new System.Drawing.Size(764, 251);
             this.dgvLivre.TabIndex = 12;
@@ -902,9 +1007,9 @@ namespace Mediateq_AP_SIO2
             this.groupBoxLivre2.Controls.Add(this.cbxModifCateg);
             this.groupBoxLivre2.Controls.Add(this.btnSuppLivre);
             this.groupBoxLivre2.Controls.Add(this.cbModifLivre);
-            this.groupBoxLivre2.Location = new System.Drawing.Point(332, 12);
+            this.groupBoxLivre2.Location = new System.Drawing.Point(345, 84);
             this.groupBoxLivre2.Name = "groupBoxLivre2";
-            this.groupBoxLivre2.Size = new System.Drawing.Size(346, 303);
+            this.groupBoxLivre2.Size = new System.Drawing.Size(346, 333);
             this.groupBoxLivre2.TabIndex = 11;
             this.groupBoxLivre2.TabStop = false;
             this.groupBoxLivre2.Text = "Livres modif";
@@ -1026,12 +1131,14 @@ namespace Mediateq_AP_SIO2
             // 
             // btnModifLivre
             // 
+            this.btnModifLivre.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnModifLivre.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnModifLivre.Location = new System.Drawing.Point(169, 245);
             this.btnModifLivre.Name = "btnModifLivre";
-            this.btnModifLivre.Size = new System.Drawing.Size(75, 23);
+            this.btnModifLivre.Size = new System.Drawing.Size(121, 40);
             this.btnModifLivre.TabIndex = 18;
             this.btnModifLivre.Text = "Modifier";
-            this.btnModifLivre.UseVisualStyleBackColor = true;
+            this.btnModifLivre.UseVisualStyleBackColor = false;
             this.btnModifLivre.Enter += new System.EventHandler(this.btnModifLivre_Enter);
             // 
             // cbxModifCateg
@@ -1044,12 +1151,14 @@ namespace Mediateq_AP_SIO2
             // 
             // btnSuppLivre
             // 
-            this.btnSuppLivre.Location = new System.Drawing.Point(169, 274);
+            this.btnSuppLivre.BackColor = System.Drawing.Color.Red;
+            this.btnSuppLivre.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnSuppLivre.Location = new System.Drawing.Point(169, 291);
             this.btnSuppLivre.Name = "btnSuppLivre";
-            this.btnSuppLivre.Size = new System.Drawing.Size(75, 23);
+            this.btnSuppLivre.Size = new System.Drawing.Size(121, 36);
             this.btnSuppLivre.TabIndex = 12;
             this.btnSuppLivre.Text = "Supprimer";
-            this.btnSuppLivre.UseVisualStyleBackColor = true;
+            this.btnSuppLivre.UseVisualStyleBackColor = false;
             this.btnSuppLivre.Enter += new System.EventHandler(this.btnSuppLivre_Enter);
             // 
             // cbModifLivre
@@ -1078,7 +1187,7 @@ namespace Mediateq_AP_SIO2
             this.groupBoxLivre.Controls.Add(this.txtLivre_image);
             this.groupBoxLivre.Controls.Add(this.txtLivre_titre);
             this.groupBoxLivre.Controls.Add(this.txtLivre_id);
-            this.groupBoxLivre.Location = new System.Drawing.Point(8, 12);
+            this.groupBoxLivre.Location = new System.Drawing.Point(20, 73);
             this.groupBoxLivre.Name = "groupBoxLivre";
             this.groupBoxLivre.Size = new System.Drawing.Size(295, 280);
             this.groupBoxLivre.TabIndex = 0;
@@ -1087,12 +1196,14 @@ namespace Mediateq_AP_SIO2
             // 
             // btnAjouter_livre
             // 
-            this.btnAjouter_livre.Location = new System.Drawing.Point(123, 240);
+            this.btnAjouter_livre.BackColor = System.Drawing.Color.Green;
+            this.btnAjouter_livre.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnAjouter_livre.Location = new System.Drawing.Point(123, 222);
             this.btnAjouter_livre.Name = "btnAjouter_livre";
-            this.btnAjouter_livre.Size = new System.Drawing.Size(75, 23);
+            this.btnAjouter_livre.Size = new System.Drawing.Size(112, 41);
             this.btnAjouter_livre.TabIndex = 1;
             this.btnAjouter_livre.Text = "Ajouter";
-            this.btnAjouter_livre.UseVisualStyleBackColor = true;
+            this.btnAjouter_livre.UseVisualStyleBackColor = false;
             this.btnAjouter_livre.Enter += new System.EventHandler(this.btnAjouter_livre_Enter);
             // 
             // label45
@@ -1398,6 +1509,7 @@ namespace Mediateq_AP_SIO2
             // 
             // CRUD_abo
             // 
+            this.CRUD_abo.Controls.Add(this.label14);
             this.CRUD_abo.Controls.Add(this.groupBox3);
             this.CRUD_abo.Controls.Add(this.dtp_premier_abo);
             this.CRUD_abo.Controls.Add(this.dtp_annee);
@@ -1414,8 +1526,6 @@ namespace Mediateq_AP_SIO2
             this.CRUD_abo.Controls.Add(this.label17);
             this.CRUD_abo.Controls.Add(this.label16);
             this.CRUD_abo.Controls.Add(this.label15);
-            this.CRUD_abo.Controls.Add(this.label14);
-            this.CRUD_abo.Controls.Add(this.Aj_id);
             this.CRUD_abo.Controls.Add(this.Aj_adresse_mail);
             this.CRUD_abo.Controls.Add(this.Aj_adresse);
             this.CRUD_abo.Controls.Add(this.Aj_tel);
@@ -1430,12 +1540,22 @@ namespace Mediateq_AP_SIO2
             this.CRUD_abo.UseVisualStyleBackColor = true;
             this.CRUD_abo.Enter += new System.EventHandler(this.CRUD_abo_Enter);
             // 
+            // label14
+            // 
+            this.label14.Font = new System.Drawing.Font("Magneto", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label14.Location = new System.Drawing.Point(374, 15);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(234, 38);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "CRUD Abonné";
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.dgvRechercherAbo);
             this.groupBox3.Controls.Add(this.txtBoxRechercherAbo);
             this.groupBox3.Controls.Add(this.label70);
-            this.groupBox3.Location = new System.Drawing.Point(644, 97);
+            this.groupBox3.Location = new System.Drawing.Point(647, 155);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(722, 231);
             this.groupBox3.TabIndex = 47;
@@ -1455,6 +1575,7 @@ namespace Mediateq_AP_SIO2
             this.rech_abo_date_naissance,
             this.rech_abo_date_premier_abo,
             this.rech_abo_date_fin_abo});
+            this.dgvRechercherAbo.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvRechercherAbo.Location = new System.Drawing.Point(6, 75);
             this.dgvRechercherAbo.Name = "dgvRechercherAbo";
             this.dgvRechercherAbo.Size = new System.Drawing.Size(746, 150);
@@ -1523,27 +1644,16 @@ namespace Mediateq_AP_SIO2
             this.label70.TabIndex = 0;
             this.label70.Text = "Nom";
             // 
-            // dtp_premier_abo
-            // 
-            this.dtp_premier_abo.Enabled = false;
-            this.dtp_premier_abo.Location = new System.Drawing.Point(167, 266);
-            this.dtp_premier_abo.MaxDate = new System.DateTime(2024, 1, 1, 0, 0, 0, 0);
-            this.dtp_premier_abo.MinDate = new System.DateTime(2023, 5, 8, 0, 0, 0, 0);
-            this.dtp_premier_abo.Name = "dtp_premier_abo";
-            this.dtp_premier_abo.Size = new System.Drawing.Size(117, 20);
-            this.dtp_premier_abo.TabIndex = 46;
-            this.dtp_premier_abo.Value = new System.DateTime(2023, 5, 8, 0, 0, 0, 0);
-            // 
             // dtp_annee
             // 
-            this.dtp_annee.Location = new System.Drawing.Point(167, 233);
+            this.dtp_annee.Location = new System.Drawing.Point(167, 247);
             this.dtp_annee.Name = "dtp_annee";
             this.dtp_annee.Size = new System.Drawing.Size(125, 20);
             this.dtp_annee.TabIndex = 45;
             // 
             // Refresh
             // 
-            this.Refresh.Location = new System.Drawing.Point(959, 517);
+            this.Refresh.Location = new System.Drawing.Point(930, 542);
             this.Refresh.Name = "Refresh";
             this.Refresh.Size = new System.Drawing.Size(75, 23);
             this.Refresh.TabIndex = 44;
@@ -1564,7 +1674,8 @@ namespace Mediateq_AP_SIO2
             this.dateNaissanceAbo,
             this.datePremierAbo,
             this.dateFinAbo});
-            this.dataGridAbo.Location = new System.Drawing.Point(8, 426);
+            this.dataGridAbo.GridColor = System.Drawing.Color.DarkKhaki;
+            this.dataGridAbo.Location = new System.Drawing.Point(3, 468);
             this.dataGridAbo.Name = "dataGridAbo";
             this.dataGridAbo.Size = new System.Drawing.Size(921, 206);
             this.dataGridAbo.TabIndex = 43;
@@ -1638,12 +1749,12 @@ namespace Mediateq_AP_SIO2
             this.groupBox1.Controls.Add(this.label24);
             this.groupBox1.Controls.Add(this.cb_modif);
             this.groupBox1.Controls.Add(this.modif_id);
-            this.groupBox1.Location = new System.Drawing.Point(301, 16);
+            this.groupBox1.Location = new System.Drawing.Point(290, 62);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(337, 375);
+            this.groupBox1.Size = new System.Drawing.Size(351, 388);
             this.groupBox1.TabIndex = 41;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "modif Abo";
             // 
             // txt_modif_tel
             // 
@@ -1654,12 +1765,14 @@ namespace Mediateq_AP_SIO2
             // 
             // verifDate
             // 
-            this.verifDate.Location = new System.Drawing.Point(158, 346);
+            this.verifDate.BackColor = System.Drawing.Color.ForestGreen;
+            this.verifDate.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.verifDate.Location = new System.Drawing.Point(133, 339);
             this.verifDate.Name = "verifDate";
-            this.verifDate.Size = new System.Drawing.Size(75, 23);
+            this.verifDate.Size = new System.Drawing.Size(83, 36);
             this.verifDate.TabIndex = 47;
             this.verifDate.Text = "Verif abo";
-            this.verifDate.UseVisualStyleBackColor = true;
+            this.verifDate.UseVisualStyleBackColor = false;
             this.verifDate.Click += new System.EventHandler(this.verifDate_Click);
             // 
             // dtp_date_fin_abo
@@ -1712,12 +1825,14 @@ namespace Mediateq_AP_SIO2
             // 
             // Modifier
             // 
-            this.Modifier.Location = new System.Drawing.Point(256, 346);
+            this.Modifier.BackColor = System.Drawing.Color.DodgerBlue;
+            this.Modifier.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Modifier.Location = new System.Drawing.Point(241, 341);
             this.Modifier.Name = "Modifier";
-            this.Modifier.Size = new System.Drawing.Size(75, 23);
+            this.Modifier.Size = new System.Drawing.Size(104, 33);
             this.Modifier.TabIndex = 30;
             this.Modifier.Text = "Modifier";
-            this.Modifier.UseVisualStyleBackColor = true;
+            this.Modifier.UseVisualStyleBackColor = false;
             this.Modifier.Click += new System.EventHandler(this.Modifier_Click);
             // 
             // label30
@@ -1831,25 +1946,27 @@ namespace Mediateq_AP_SIO2
             // cbSupp
             // 
             this.cbSupp.FormattingEnabled = true;
-            this.cbSupp.Location = new System.Drawing.Point(748, 26);
+            this.cbSupp.Location = new System.Drawing.Point(744, 73);
             this.cbSupp.Name = "cbSupp";
             this.cbSupp.Size = new System.Drawing.Size(121, 21);
             this.cbSupp.TabIndex = 39;
             // 
             // supprimer
             // 
-            this.supprimer.Location = new System.Drawing.Point(762, 59);
+            this.supprimer.BackColor = System.Drawing.Color.Red;
+            this.supprimer.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.supprimer.Location = new System.Drawing.Point(744, 108);
             this.supprimer.Name = "supprimer";
-            this.supprimer.Size = new System.Drawing.Size(75, 23);
+            this.supprimer.Size = new System.Drawing.Size(121, 32);
             this.supprimer.TabIndex = 21;
             this.supprimer.Text = "supprimer";
-            this.supprimer.UseVisualStyleBackColor = true;
+            this.supprimer.UseVisualStyleBackColor = false;
             this.supprimer.Click += new System.EventHandler(this.supprimer_Click);
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(675, 29);
+            this.label23.Location = new System.Drawing.Point(660, 81);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(67, 13);
             this.label23.TabIndex = 20;
@@ -1858,7 +1975,7 @@ namespace Mediateq_AP_SIO2
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(24, 273);
+            this.label21.Location = new System.Drawing.Point(28, 280);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(133, 13);
             this.label21.TabIndex = 17;
@@ -1867,7 +1984,7 @@ namespace Mediateq_AP_SIO2
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(53, 233);
+            this.label20.Location = new System.Drawing.Point(79, 247);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(82, 13);
             this.label20.TabIndex = 16;
@@ -1876,7 +1993,7 @@ namespace Mediateq_AP_SIO2
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(67, 192);
+            this.label19.Location = new System.Drawing.Point(96, 214);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(68, 13);
             this.label19.TabIndex = 15;
@@ -1885,7 +2002,7 @@ namespace Mediateq_AP_SIO2
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(94, 153);
+            this.label18.Location = new System.Drawing.Point(122, 179);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(18, 13);
             this.label18.TabIndex = 14;
@@ -1894,7 +2011,7 @@ namespace Mediateq_AP_SIO2
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(84, 131);
+            this.label17.Location = new System.Drawing.Point(120, 141);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(44, 13);
             this.label17.TabIndex = 13;
@@ -1903,7 +2020,7 @@ namespace Mediateq_AP_SIO2
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(79, 88);
+            this.label16.Location = new System.Drawing.Point(122, 106);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(42, 13);
             this.label16.TabIndex = 12;
@@ -1912,71 +2029,57 @@ namespace Mediateq_AP_SIO2
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(94, 49);
+            this.label15.Location = new System.Drawing.Point(134, 62);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(27, 13);
             this.label15.TabIndex = 11;
             this.label15.Text = "nom";
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(94, 19);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(15, 13);
-            this.label14.TabIndex = 10;
-            this.label14.Text = "id";
-            // 
-            // Aj_id
-            // 
-            this.Aj_id.Location = new System.Drawing.Point(175, 16);
-            this.Aj_id.Name = "Aj_id";
-            this.Aj_id.Size = new System.Drawing.Size(100, 20);
-            this.Aj_id.TabIndex = 9;
-            // 
             // Aj_adresse_mail
             // 
-            this.Aj_adresse_mail.Location = new System.Drawing.Point(175, 189);
+            this.Aj_adresse_mail.Location = new System.Drawing.Point(175, 207);
             this.Aj_adresse_mail.Name = "Aj_adresse_mail";
             this.Aj_adresse_mail.Size = new System.Drawing.Size(100, 20);
             this.Aj_adresse_mail.TabIndex = 5;
             // 
             // Aj_adresse
             // 
-            this.Aj_adresse.Location = new System.Drawing.Point(175, 124);
+            this.Aj_adresse.Location = new System.Drawing.Point(175, 138);
             this.Aj_adresse.Name = "Aj_adresse";
             this.Aj_adresse.Size = new System.Drawing.Size(100, 20);
             this.Aj_adresse.TabIndex = 4;
             // 
             // Aj_tel
             // 
-            this.Aj_tel.Location = new System.Drawing.Point(175, 158);
+            this.Aj_tel.Location = new System.Drawing.Point(175, 172);
             this.Aj_tel.Name = "Aj_tel";
             this.Aj_tel.Size = new System.Drawing.Size(100, 20);
             this.Aj_tel.TabIndex = 2;
             // 
             // Aj_prenom
             // 
-            this.Aj_prenom.Location = new System.Drawing.Point(175, 81);
+            this.Aj_prenom.Location = new System.Drawing.Point(175, 99);
             this.Aj_prenom.Name = "Aj_prenom";
             this.Aj_prenom.Size = new System.Drawing.Size(100, 20);
             this.Aj_prenom.TabIndex = 1;
             // 
             // Aj_nom
             // 
-            this.Aj_nom.Location = new System.Drawing.Point(175, 46);
+            this.Aj_nom.Location = new System.Drawing.Point(175, 62);
             this.Aj_nom.Name = "Aj_nom";
             this.Aj_nom.Size = new System.Drawing.Size(100, 20);
             this.Aj_nom.TabIndex = 0;
             // 
             // Ajouter
             // 
-            this.Ajouter.Location = new System.Drawing.Point(186, 305);
+            this.Ajouter.BackColor = System.Drawing.Color.DodgerBlue;
+            this.Ajouter.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Ajouter.Location = new System.Drawing.Point(167, 315);
             this.Ajouter.Name = "Ajouter";
-            this.Ajouter.Size = new System.Drawing.Size(75, 23);
+            this.Ajouter.Size = new System.Drawing.Size(117, 38);
             this.Ajouter.TabIndex = 8;
             this.Ajouter.Text = "Ajouter";
-            this.Ajouter.UseVisualStyleBackColor = true;
+            this.Ajouter.UseVisualStyleBackColor = false;
             this.Ajouter.Click += new System.EventHandler(this.Ajouter_Click_1);
             // 
             // tabLivres
@@ -2430,75 +2533,16 @@ namespace Mediateq_AP_SIO2
             this.Connexion.TabIndex = 0;
             this.Connexion.Enter += new System.EventHandler(this.tabOngletsApplication_Enter);
             // 
-            // rech_id_livre
+            // dtp_premier_abo
             // 
-            this.rech_id_livre.HeaderText = "ID";
-            this.rech_id_livre.Name = "rech_id_livre";
-            // 
-            // rech_titre_livre
-            // 
-            this.rech_titre_livre.HeaderText = "Titre";
-            this.rech_titre_livre.Name = "rech_titre_livre";
-            // 
-            // rech_isbn_livre
-            // 
-            this.rech_isbn_livre.HeaderText = "ISBN";
-            this.rech_isbn_livre.Name = "rech_isbn_livre";
-            // 
-            // rech_auteur_livre
-            // 
-            this.rech_auteur_livre.HeaderText = "Auteur";
-            this.rech_auteur_livre.Name = "rech_auteur_livre";
-            // 
-            // rech_collection_livre
-            // 
-            this.rech_collection_livre.HeaderText = "Collection";
-            this.rech_collection_livre.Name = "rech_collection_livre";
-            // 
-            // rech_image_livre
-            // 
-            this.rech_image_livre.HeaderText = "Image";
-            this.rech_image_livre.Name = "rech_image_livre";
-            // 
-            // rech_categorie_livre
-            // 
-            this.rech_categorie_livre.HeaderText = "Categorie";
-            this.rech_categorie_livre.Name = "rech_categorie_livre";
-            // 
-            // rech_id
-            // 
-            this.rech_id.HeaderText = "ID";
-            this.rech_id.Name = "rech_id";
-            // 
-            // rech_titre
-            // 
-            this.rech_titre.HeaderText = "Titre";
-            this.rech_titre.Name = "rech_titre";
-            // 
-            // rech_synopsis
-            // 
-            this.rech_synopsis.HeaderText = "Synopsis";
-            this.rech_synopsis.Name = "rech_synopsis";
-            // 
-            // rech_realisateur
-            // 
-            this.rech_realisateur.HeaderText = "Réalisateur";
-            this.rech_realisateur.Name = "rech_realisateur";
-            // 
-            // rech_duree
-            // 
-            this.rech_duree.HeaderText = "Durée";
-            this.rech_duree.Name = "rech_duree";
-            // 
-            // rech_image
-            // 
-            this.rech_image.HeaderText = "Image";
-            this.rech_image.Name = "rech_image";
-            // 
-            // rech_categorie
-            // 
-            this.rech_categorie.HeaderText = "Categorie";
-            this.rech_categorie.Name = "rech_categorie";
+            this.dtp_premier_abo.Enabled = false;
+            this.dtp_premier_abo.Location = new System.Drawing.Point(167, 280);
+            this.dtp_premier_abo.MaxDate = new System.DateTime(2024, 1, 1, 0, 0, 0, 0);
+            this.dtp_premier_abo.MinDate = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
+            this.dtp_premier_abo.Name = "dtp_premier_abo";
+            this.dtp_premier_abo.Size = new System.Drawing.Size(117, 20);
+            this.dtp_premier_abo.TabIndex = 46;
+            this.dtp_premier_abo.Value = new System.DateTime(2023, 6, 11, 0, 0, 0, 0);
             // 
             // FrmMediateq
             // 
@@ -2510,6 +2554,7 @@ namespace Mediateq_AP_SIO2
             this.Text = "Gestion Médiathèque";
             this.Load += new System.EventHandler(this.FrmMediateq_Load);
             this.CRUD_DVD.ResumeLayout(false);
+            this.CRUD_DVD.PerformLayout();
             this.grpBoxRechercherDvd.ResumeLayout(false);
             this.grpBoxRechercherDvd.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRechercherTitreDvd)).EndInit();
@@ -2519,6 +2564,7 @@ namespace Mediateq_AP_SIO2
             this.gpxCRUD_DVD.ResumeLayout(false);
             this.gpxCRUD_DVD.PerformLayout();
             this.CRUDLivreDvd.ResumeLayout(false);
+            this.CRUDLivreDvd.PerformLayout();
             this.grpBoxRechercherLivre.ResumeLayout(false);
             this.grpBoxRechercherLivre.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRechercherLivreTitre)).EndInit();
@@ -2685,7 +2731,6 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.DataGridView dgvRechercherAbo;
         private System.Windows.Forms.TextBox txtBoxRechercherAbo;
         private System.Windows.Forms.Label label70;
-        private System.Windows.Forms.DateTimePicker dtp_premier_abo;
         private System.Windows.Forms.DateTimePicker dtp_annee;
         private System.Windows.Forms.Button Refresh;
         private System.Windows.Forms.DataGridView dataGridAbo;
@@ -2724,15 +2769,12 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.ComboBox cbSupp;
         private System.Windows.Forms.Button supprimer;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox Aj_id;
         private System.Windows.Forms.TextBox Aj_adresse_mail;
         private System.Windows.Forms.TextBox Aj_adresse;
         private System.Windows.Forms.TextBox Aj_tel;
@@ -2809,6 +2851,11 @@ namespace Mediateq_AP_SIO2
         private System.Windows.Forms.DataGridViewTextBoxColumn rech_duree;
         private System.Windows.Forms.DataGridViewTextBoxColumn rech_image;
         private System.Windows.Forms.DataGridViewTextBoxColumn rech_categorie;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.Label label71;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.DateTimePicker dtp_premier_abo;
     }
 }
 

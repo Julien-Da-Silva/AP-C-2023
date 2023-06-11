@@ -6,18 +6,28 @@ using System.Threading.Tasks;
 
 namespace Mediateq_AP_SIO2.metier
 {
-    class Rayon
+    /// <summary>
+    /// Représente un rayon dans une médiathèque.
+    /// </summary>
+     class Rayon
     {
-        private string id;
-        private string libelle;
 
         public Rayon(string id, string libelle)
         {
-            this.id = id;
-            this.libelle = libelle;
+            Id = id;
+            Libelle = libelle;
         }
 
-        public string Id { get => id; set => id = value; }
-        public string Libelle { get => libelle; set => libelle = value; }
+        /// <summary>
+        /// Obtient ou définit l'identifiant du rayon.
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
+        /// Obtient ou définit le libellé du rayon.
+        /// </summary>
+        public string Libelle { get; set; }
+
+        /// Initialise une nouvelle instance de la classe Rayon.
     }
 }

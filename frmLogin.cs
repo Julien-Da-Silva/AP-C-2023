@@ -13,6 +13,9 @@ using MySql.Data.MySqlClient;
 
 namespace Mediateq_AP_SIO2
 {
+    /// <summary>
+    /// Formulaire login ou sont réalisé les traitements pour la connexion
+    /// </summary>
     public partial class frmLogin : Form
     {
         public frmLogin()
@@ -24,13 +27,15 @@ namespace Mediateq_AP_SIO2
         {
             Users u = DAODocuments.connex(txtUsername.Text);
             string passwordHash = txtPassword.Text;
-            if (u.Password==passwordHash)
+            if (u != null && u.Password == passwordHash)
             {
                 new FrmMediateq(u).Show();
-            } else
-            {
-                MessageBox.Show("Nom d'utilisateur ou mot de passe invalide" , "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else
+            {
+                MessageBox.Show("Nom d'utilisateur ou mot de passe invalide", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
         /*BitConverter.ToString(new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(txtPassword.Text))).Replace("-", "");*/
 
@@ -44,6 +49,21 @@ namespace Mediateq_AP_SIO2
             catch (Exception exc)
             {
                 MessageBox.Show(exc.Message);
+            }
+        }
+
+        private void CheckbxShowPas_CheckedChanged(object sender, EventArgs e)
+        {
+            // Vérifier l'état de la case à cocher
+            if (CheckbxShowPas.Checked)
+            {
+                // Afficher le mot de passe
+                txtPassword.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                // Masquer le mot de passe
+                txtPassword.UseSystemPasswordChar = true;
             }
         }
     }

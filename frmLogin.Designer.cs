@@ -79,6 +79,7 @@ namespace Mediateq_AP_SIO2
             this.CheckbxShowPas.TabIndex = 19;
             this.CheckbxShowPas.Text = "Show Password";
             this.CheckbxShowPas.UseVisualStyleBackColor = true;
+            this.CheckbxShowPas.CheckedChanged += new System.EventHandler(this.CheckbxShowPas_CheckedChanged);
             // 
             // txtPassword
             // 
@@ -132,9 +133,9 @@ namespace Mediateq_AP_SIO2
             this.label1.ForeColor = System.Drawing.Color.DarkBlue;
             this.label1.Location = new System.Drawing.Point(320, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(155, 27);
+            this.label1.Size = new System.Drawing.Size(141, 27);
             this.label1.TabIndex = 12;
-            this.label1.Text = "Get Started";
+            this.label1.Text = "Connexion";
             // 
             // pictureBox1
             // 
